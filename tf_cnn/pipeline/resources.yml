@@ -1,0 +1,23 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tfc-repo
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/raynalee4/benchmarks.git
+    - name: revision
+      value: tf-cnn-benchmark
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tfc-build-image
+spec:
+  type: image
+  params:
+    - name: url
+      value: docker-registry.default.svc:5000/mlperf/tf_cnn:latest
+---

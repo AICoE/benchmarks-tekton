@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: tfc-run
+spec:
+  inputs:
+    resources:
+    - name: image
+      type: image
+    params:
+    - name: device
+      type: string
+    - name: batch_size
+      type: string
+    - name: model
+      type: string
+    - name: variable_update
+      type: string
+    - name: data_format
+      type: string
+    - name: weight_decay
+      type: string
+    - name: optimizer
+      type: string
+    - name: gradient_repacking
+      type: string
+    - name: train_dir
+      type: string
+  steps:
+    - name: run
+      image: $(inputs.resources.image.url)
+      workingDir: /tf_cnn
+      securityContext:
+        privileged: true
+      args:
+        - '-c'
+        - |
+          source scl_source enable devtoolset-8 rh-python36
+          python tf_cnn_benchmarks.py \
+            --device=$(inputs.params.device) --batch_size=$(inputs.params.batch_size) --model=$(inputs.params.model) \
+            --variable_update=$(inputs.params.variable_update) --data_format=$(inputs.params.data_format) \
+            --nodistortions --weight_decay=$(inputs.params.weight_decay) --optimizer=$(inputs.params.optimizer) \
+            --gradient_repacking=$(inputs.params.gradient_repacking) --train_dir=$(inputs.params.train_dir) 
+      command: 
+        - /bin/sh
+
+  
