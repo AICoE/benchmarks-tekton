@@ -1,0 +1,1478 @@
+STEP 1: FROM centos:7
+Getting image source signatures
+Copying blob sha256:524b0c1e57f8ee5fee01a1decba2f301c324a6513ca3551021264e3aa7341ebc
+Copying config sha256:b5b4d78bc90ccd15806443fb881e35b5ddba924e2f475c1071a38a3094c3081d
+Writing manifest to image destination
+Storing signatures
+STEP 2: COPY ./scripts/tf_cnn_benchmarks /tf_cnn
+5411a60007ffc9fb3d37943a2fc145eca6e833a7d53d1a0fc5967a0e0ee6d519
+STEP 3: WORKDIR /tf_cnn
+441f8aca32f31c7bcde58cf0ccecd1ff11463778687c7e97c6655c71e216d34a
+STEP 4: RUN mkdir train
+d8ad3c5ea0a8ddb8bad12a78a993837a9fd5d71d4421b3fc568fc922fe2f014c
+STEP 5: RUN yum install -y centos-release-scl
+Loaded plugins: fastestmirror, ovl
+Determining fastest mirrors
+ * base: reflector.westga.edu
+ * extras: mirror.metrocast.net
+ * updates: distro.ibiblio.org
+Resolving Dependencies
+--> Running transaction check
+---> Package centos-release-scl.noarch 0:2-3.el7.centos will be installed
+--> Processing Dependency: centos-release-scl-rh for package: centos-release-scl-2-3.el7.centos.noarch
+--> Running transaction check
+---> Package centos-release-scl-rh.noarch 0:2-3.el7.centos will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch        Version               Repository   Size
+================================================================================
+Installing:
+ centos-release-scl         noarch      2-3.el7.centos        extras       12 k
+Installing for dependencies:
+ centos-release-scl-rh      noarch      2-3.el7.centos        extras       12 k
+
+Transaction Summary
+================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 24 k
+Installed size: 39 k
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/extras/packages/centos-release-scl-2-3.el7.centos.noarch.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+Public key for centos-release-scl-2-3.el7.centos.noarch.rpm is not installed
+--------------------------------------------------------------------------------
+Total                                              129 kB/s |  24 kB  00:00     
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Importing GPG key 0xF4A80EB5:
+ Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+ Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+ Package    : centos-release-7-8.2003.0.el7.centos.x86_64 (@CentOS)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : centos-release-scl-rh-2-3.el7.centos.noarch                  1/2 
+  Installing : centos-release-scl-2-3.el7.centos.noarch                     2/2 
+  Verifying  : centos-release-scl-2-3.el7.centos.noarch                     1/2 
+  Verifying  : centos-release-scl-rh-2-3.el7.centos.noarch                  2/2 
+
+Installed:
+  centos-release-scl.noarch 0:2-3.el7.centos                                    
+
+Dependency Installed:
+  centos-release-scl-rh.noarch 0:2-3.el7.centos                                 
+
+Complete!
+a7f212632ee65ae482028a6c933a720e9fa586eed0bdfda7f30361828afdb04e
+STEP 6: RUN yum install rh-python36 -y devtoolset-8
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: reflector.westga.edu
+ * centos-sclo-rh: packages.oit.ncsu.edu
+ * centos-sclo-sclo: distro.ibiblio.org
+ * extras: mirror.metrocast.net
+ * updates: distro.ibiblio.org
+Resolving Dependencies
+--> Running transaction check
+---> Package devtoolset-8.x86_64 0:8.1-1.el7 will be installed
+--> Processing Dependency: devtoolset-8-perftools for package: devtoolset-8-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-runtime for package: devtoolset-8-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-toolchain for package: devtoolset-8-8.1-1.el7.x86_64
+---> Package rh-python36.x86_64 0:2.0-1.el7 will be installed
+--> Processing Dependency: rh-python36-runtime for package: rh-python36-2.0-1.el7.x86_64
+--> Processing Dependency: rh-python36-python for package: rh-python36-2.0-1.el7.x86_64
+--> Processing Dependency: rh-python36-python-pip for package: rh-python36-2.0-1.el7.x86_64
+--> Processing Dependency: rh-python36-python-setuptools for package: rh-python36-2.0-1.el7.x86_64
+--> Processing Dependency: rh-python36-python-virtualenv for package: rh-python36-2.0-1.el7.x86_64
+--> Running transaction check
+---> Package devtoolset-8-perftools.x86_64 0:8.1-1.el7 will be installed
+--> Processing Dependency: devtoolset-8-oprofile for package: devtoolset-8-perftools-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-systemtap for package: devtoolset-8-perftools-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-valgrind for package: devtoolset-8-perftools-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-dyninst for package: devtoolset-8-perftools-8.1-1.el7.x86_64
+---> Package devtoolset-8-runtime.x86_64 0:8.1-1.el7 will be installed
+--> Processing Dependency: scl-utils >= 20120927-11 for package: devtoolset-8-runtime-8.1-1.el7.x86_64
+--> Processing Dependency: /usr/sbin/restorecon for package: devtoolset-8-runtime-8.1-1.el7.x86_64
+--> Processing Dependency: /usr/sbin/restorecon for package: devtoolset-8-runtime-8.1-1.el7.x86_64
+--> Processing Dependency: /usr/sbin/semanage for package: devtoolset-8-runtime-8.1-1.el7.x86_64
+--> Processing Dependency: /usr/sbin/semanage for package: devtoolset-8-runtime-8.1-1.el7.x86_64
+---> Package devtoolset-8-toolchain.x86_64 0:8.1-1.el7 will be installed
+--> Processing Dependency: devtoolset-8-gcc for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-gcc-c++ for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-gcc-gfortran for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-binutils for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-gdb for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-strace for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-dwz for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-elfutils for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-memstomp for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-ltrace for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-make for package: devtoolset-8-toolchain-8.1-1.el7.x86_64
+---> Package rh-python36-python.x86_64 0:3.6.9-2.el7 will be installed
+--> Processing Dependency: rh-python36-python-libs(x86-64) = 3.6.9-2.el7 for package: rh-python36-python-3.6.9-2.el7.x86_64
+--> Processing Dependency: libpython3.6m.so.rh-python36-1.0()(64bit) for package: rh-python36-python-3.6.9-2.el7.x86_64
+---> Package rh-python36-python-pip.noarch 0:9.0.1-2.el7 will be installed
+---> Package rh-python36-python-setuptools.noarch 0:36.5.0-1.el7 will be installed
+---> Package rh-python36-python-virtualenv.noarch 0:15.1.0-2.el7 will be installed
+--> Processing Dependency: rh-python36-python-devel for package: rh-python36-python-virtualenv-15.1.0-2.el7.noarch
+---> Package rh-python36-runtime.x86_64 0:2.0-1.el7 will be installed
+--> Running transaction check
+---> Package devtoolset-8-binutils.x86_64 0:2.30-55.el7.2 will be installed
+---> Package devtoolset-8-dwz.x86_64 0:0.12-1.1.el7 will be installed
+---> Package devtoolset-8-dyninst.x86_64 0:9.3.2-6.el7 will be installed
+--> Processing Dependency: libboost_date_time-mt.so.1.53.0()(64bit) for package: devtoolset-8-dyninst-9.3.2-6.el7.x86_64
+--> Processing Dependency: libboost_system-mt.so.1.53.0()(64bit) for package: devtoolset-8-dyninst-9.3.2-6.el7.x86_64
+--> Processing Dependency: libboost_thread-mt.so.1.53.0()(64bit) for package: devtoolset-8-dyninst-9.3.2-6.el7.x86_64
+---> Package devtoolset-8-elfutils.x86_64 0:0.176-1.el7 will be installed
+--> Processing Dependency: devtoolset-8-elfutils-libelf(x86-64) = 0.176-1.el7 for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: devtoolset-8-elfutils-libs(x86-64) = 0.176-1.el7 for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libasm.so.dts.1(ELFUTILS_1.0)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.122)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.126)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.127)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.130)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.138)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.143)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.148)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.149)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.158)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.159)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.160)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.161)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.165)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.167)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.171)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.173)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1(ELFUTILS_0.175)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.0)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.1)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.1.1)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.2)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.3)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.4)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.5)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.6)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1(ELFUTILS_1.7)(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libasm.so.dts.1()(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libdw.so.dts.1()(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+--> Processing Dependency: libelf.so.dts.1()(64bit) for package: devtoolset-8-elfutils-0.176-1.el7.x86_64
+---> Package devtoolset-8-gcc.x86_64 0:8.3.1-3.2.el7 will be installed
+--> Processing Dependency: glibc-devel >= 2.2.90-12 for package: devtoolset-8-gcc-8.3.1-3.2.el7.x86_64
+--> Processing Dependency: libgomp >= 4.4.4-13 for package: devtoolset-8-gcc-8.3.1-3.2.el7.x86_64
+--> Processing Dependency: libmpc.so.3()(64bit) for package: devtoolset-8-gcc-8.3.1-3.2.el7.x86_64
+--> Processing Dependency: libmpfr.so.4()(64bit) for package: devtoolset-8-gcc-8.3.1-3.2.el7.x86_64
+---> Package devtoolset-8-gcc-c++.x86_64 0:8.3.1-3.2.el7 will be installed
+--> Processing Dependency: devtoolset-8-libstdc++-devel = 8.3.1-3.2.el7 for package: devtoolset-8-gcc-c++-8.3.1-3.2.el7.x86_64
+---> Package devtoolset-8-gcc-gfortran.x86_64 0:8.3.1-3.2.el7 will be installed
+--> Processing Dependency: devtoolset-8-libquadmath-devel = 8.3.1-3.2.el7 for package: devtoolset-8-gcc-gfortran-8.3.1-3.2.el7.x86_64
+--> Processing Dependency: libgfortran5 >= 8.1.1 for package: devtoolset-8-gcc-gfortran-8.3.1-3.2.el7.x86_64
+---> Package devtoolset-8-gdb.x86_64 0:8.2-3.el7 will be installed
+---> Package devtoolset-8-ltrace.x86_64 0:0.7.91-1.el7 will be installed
+---> Package devtoolset-8-make.x86_64 1:4.2.1-4.el7 will be installed
+---> Package devtoolset-8-memstomp.x86_64 0:0.1.5-5.el7 will be installed
+---> Package devtoolset-8-oprofile.x86_64 0:1.3.0-2.el7 will be installed
+--> Processing Dependency: which for package: devtoolset-8-oprofile-1.3.0-2.el7.x86_64
+---> Package devtoolset-8-strace.x86_64 0:4.24-4.el7 will be installed
+---> Package devtoolset-8-systemtap.x86_64 0:3.3-2.el7 will be installed
+--> Processing Dependency: devtoolset-8-systemtap-client = 3.3-2.el7 for package: devtoolset-8-systemtap-3.3-2.el7.x86_64
+--> Processing Dependency: devtoolset-8-systemtap-devel = 3.3-2.el7 for package: devtoolset-8-systemtap-3.3-2.el7.x86_64
+---> Package devtoolset-8-valgrind.x86_64 1:3.14.0-16.el7 will be installed
+--> Processing Dependency: /usr/bin/perl for package: 1:devtoolset-8-valgrind-3.14.0-16.el7.x86_64
+--> Processing Dependency: perl(File::Basename) for package: 1:devtoolset-8-valgrind-3.14.0-16.el7.x86_64
+--> Processing Dependency: perl(strict) for package: 1:devtoolset-8-valgrind-3.14.0-16.el7.x86_64
+--> Processing Dependency: perl(warnings) for package: 1:devtoolset-8-valgrind-3.14.0-16.el7.x86_64
+---> Package policycoreutils.x86_64 0:2.5-34.el7 will be installed
+--> Processing Dependency: libselinux-utils >= 2.5-14 for package: policycoreutils-2.5-34.el7.x86_64
+---> Package policycoreutils-python.x86_64 0:2.5-34.el7 will be installed
+--> Processing Dependency: setools-libs >= 3.3.8-4 for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libsemanage-python >= 2.5-14 for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: audit-libs-python >= 2.1.3-4 for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: python-IPy for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libselinux-python for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libqpol.so.1(VERS_1.4)(64bit) for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libqpol.so.1(VERS_1.2)(64bit) for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libcgroup for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libapol.so.4(VERS_4.0)(64bit) for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: checkpolicy for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libqpol.so.1()(64bit) for package: policycoreutils-python-2.5-34.el7.x86_64
+--> Processing Dependency: libapol.so.4()(64bit) for package: policycoreutils-python-2.5-34.el7.x86_64
+---> Package rh-python36-python-devel.x86_64 0:3.6.9-2.el7 will be installed
+--> Processing Dependency: scl-utils-build for package: rh-python36-python-devel-3.6.9-2.el7.x86_64
+---> Package rh-python36-python-libs.x86_64 0:3.6.9-2.el7 will be installed
+---> Package scl-utils.x86_64 0:20130529-19.el7 will be installed
+--> Running transaction check
+---> Package audit-libs-python.x86_64 0:2.8.5-4.el7 will be installed
+---> Package boost-date-time.x86_64 0:1.53.0-28.el7 will be installed
+---> Package boost-system.x86_64 0:1.53.0-28.el7 will be installed
+---> Package boost-thread.x86_64 0:1.53.0-28.el7 will be installed
+---> Package checkpolicy.x86_64 0:2.5-8.el7 will be installed
+---> Package devtoolset-8-elfutils-libelf.x86_64 0:0.176-1.el7 will be installed
+---> Package devtoolset-8-elfutils-libs.x86_64 0:0.176-1.el7 will be installed
+---> Package devtoolset-8-libquadmath-devel.x86_64 0:8.3.1-3.2.el7 will be installed
+--> Processing Dependency: libquadmath for package: devtoolset-8-libquadmath-devel-8.3.1-3.2.el7.x86_64
+---> Package devtoolset-8-libstdc++-devel.x86_64 0:8.3.1-3.2.el7 will be installed
+---> Package devtoolset-8-systemtap-client.x86_64 0:3.3-2.el7 will be installed
+--> Processing Dependency: devtoolset-8-systemtap-runtime = 3.3-2.el7 for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+--> Processing Dependency: mokutil for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+--> Processing Dependency: openssh-clients for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+--> Processing Dependency: unzip for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+--> Processing Dependency: zip for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+--> Processing Dependency: libavahi-client.so.3()(64bit) for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+--> Processing Dependency: libavahi-common.so.3()(64bit) for package: devtoolset-8-systemtap-client-3.3-2.el7.x86_64
+---> Package devtoolset-8-systemtap-devel.x86_64 0:3.3-2.el7 will be installed
+--> Processing Dependency: /usr/bin/gcc for package: devtoolset-8-systemtap-devel-3.3-2.el7.x86_64
+--> Processing Dependency: /usr/bin/make for package: devtoolset-8-systemtap-devel-3.3-2.el7.x86_64
+--> Processing Dependency: kernel-devel-uname-r for package: devtoolset-8-systemtap-devel-3.3-2.el7.x86_64
+---> Package glibc-devel.x86_64 0:2.17-307.el7.1 will be installed
+--> Processing Dependency: glibc-headers = 2.17-307.el7.1 for package: glibc-devel-2.17-307.el7.1.x86_64
+--> Processing Dependency: glibc-headers for package: glibc-devel-2.17-307.el7.1.x86_64
+---> Package libcgroup.x86_64 0:0.41-21.el7 will be installed
+---> Package libgfortran5.x86_64 0:8.3.1-2.1.1.el7 will be installed
+---> Package libgomp.x86_64 0:4.8.5-39.el7 will be installed
+---> Package libmpc.x86_64 0:1.0.1-3.el7 will be installed
+---> Package libselinux-python.x86_64 0:2.5-15.el7 will be installed
+---> Package libselinux-utils.x86_64 0:2.5-15.el7 will be installed
+---> Package libsemanage-python.x86_64 0:2.5-14.el7 will be installed
+---> Package mpfr.x86_64 0:3.1.1-4.el7 will be installed
+---> Package perl.x86_64 4:5.16.3-295.el7 will be installed
+--> Processing Dependency: perl-libs = 4:5.16.3-295.el7 for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Socket) >= 1.3 for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Scalar::Util) >= 1.10 for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl-macros for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl-libs for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(threads::shared) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(threads) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(constant) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Time::Local) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Time::HiRes) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Storable) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Socket) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Scalar::Util) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Pod::Simple::XHTML) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Pod::Simple::Search) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Getopt::Long) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Filter::Util::Call) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(File::Temp) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(File::Spec::Unix) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(File::Spec::Functions) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(File::Spec) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(File::Path) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Exporter) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Cwd) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: perl(Carp) for package: 4:perl-5.16.3-295.el7.x86_64
+--> Processing Dependency: libperl.so()(64bit) for package: 4:perl-5.16.3-295.el7.x86_64
+---> Package python-IPy.noarch 0:0.75-6.el7 will be installed
+---> Package scl-utils-build.x86_64 0:20130529-19.el7 will be installed
+--> Processing Dependency: redhat-rpm-config for package: scl-utils-build-20130529-19.el7.x86_64
+--> Processing Dependency: iso-codes for package: scl-utils-build-20130529-19.el7.x86_64
+---> Package setools-libs.x86_64 0:3.3.8-4.el7 will be installed
+---> Package which.x86_64 0:2.20-7.el7 will be installed
+--> Running transaction check
+---> Package avahi-libs.x86_64 0:0.6.31-20.el7 will be installed
+---> Package devtoolset-8-systemtap-runtime.x86_64 0:3.3-2.el7 will be installed
+---> Package gcc.x86_64 0:4.8.5-39.el7 will be installed
+--> Processing Dependency: cpp = 4.8.5-39.el7 for package: gcc-4.8.5-39.el7.x86_64
+---> Package glibc-headers.x86_64 0:2.17-307.el7.1 will be installed
+--> Processing Dependency: kernel-headers >= 2.2.1 for package: glibc-headers-2.17-307.el7.1.x86_64
+--> Processing Dependency: kernel-headers for package: glibc-headers-2.17-307.el7.1.x86_64
+---> Package iso-codes.noarch 0:3.46-2.el7 will be installed
+--> Processing Dependency: xml-common for package: iso-codes-3.46-2.el7.noarch
+---> Package kernel-debug-devel.x86_64 0:3.10.0-1127.8.2.el7 will be installed
+---> Package libquadmath.x86_64 0:4.8.5-39.el7 will be installed
+---> Package make.x86_64 1:3.82-24.el7 will be installed
+---> Package mokutil.x86_64 0:15-2.el7.centos will be installed
+--> Processing Dependency: libefivar.so.1(libefivar.so.0)(64bit) for package: mokutil-15-2.el7.centos.x86_64
+--> Processing Dependency: libefivar.so.1(LIBEFIVAR_0.24)(64bit) for package: mokutil-15-2.el7.centos.x86_64
+--> Processing Dependency: libefivar.so.1()(64bit) for package: mokutil-15-2.el7.centos.x86_64
+---> Package openssh-clients.x86_64 0:7.4p1-21.el7 will be installed
+--> Processing Dependency: openssh = 7.4p1-21.el7 for package: openssh-clients-7.4p1-21.el7.x86_64
+--> Processing Dependency: fipscheck-lib(x86-64) >= 1.3.0 for package: openssh-clients-7.4p1-21.el7.x86_64
+--> Processing Dependency: libfipscheck.so.1()(64bit) for package: openssh-clients-7.4p1-21.el7.x86_64
+--> Processing Dependency: libedit.so.0()(64bit) for package: openssh-clients-7.4p1-21.el7.x86_64
+---> Package perl-Carp.noarch 0:1.26-244.el7 will be installed
+---> Package perl-Exporter.noarch 0:5.68-3.el7 will be installed
+---> Package perl-File-Path.noarch 0:2.09-2.el7 will be installed
+---> Package perl-File-Temp.noarch 0:0.23.01-3.el7 will be installed
+---> Package perl-Filter.x86_64 0:1.49-3.el7 will be installed
+---> Package perl-Getopt-Long.noarch 0:2.40-3.el7 will be installed
+--> Processing Dependency: perl(Pod::Usage) >= 1.14 for package: perl-Getopt-Long-2.40-3.el7.noarch
+--> Processing Dependency: perl(Text::ParseWords) for package: perl-Getopt-Long-2.40-3.el7.noarch
+---> Package perl-PathTools.x86_64 0:3.40-5.el7 will be installed
+---> Package perl-Pod-Simple.noarch 1:3.28-4.el7 will be installed
+--> Processing Dependency: perl(Pod::Escapes) >= 1.04 for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+--> Processing Dependency: perl(Encode) for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+---> Package perl-Scalar-List-Utils.x86_64 0:1.27-248.el7 will be installed
+---> Package perl-Socket.x86_64 0:2.010-5.el7 will be installed
+---> Package perl-Storable.x86_64 0:2.45-3.el7 will be installed
+---> Package perl-Time-HiRes.x86_64 4:1.9725-3.el7 will be installed
+---> Package perl-Time-Local.noarch 0:1.2300-2.el7 will be installed
+---> Package perl-constant.noarch 0:1.27-2.el7 will be installed
+---> Package perl-libs.x86_64 4:5.16.3-295.el7 will be installed
+---> Package perl-macros.x86_64 4:5.16.3-295.el7 will be installed
+---> Package perl-threads.x86_64 0:1.87-4.el7 will be installed
+---> Package perl-threads-shared.x86_64 0:1.43-6.el7 will be installed
+---> Package redhat-rpm-config.noarch 0:9.1.0-88.el7.centos will be installed
+--> Processing Dependency: dwz >= 0.4 for package: redhat-rpm-config-9.1.0-88.el7.centos.noarch
+--> Processing Dependency: python-srpm-macros for package: redhat-rpm-config-9.1.0-88.el7.centos.noarch
+--> Processing Dependency: perl-srpm-macros for package: redhat-rpm-config-9.1.0-88.el7.centos.noarch
+---> Package unzip.x86_64 0:6.0-21.el7 will be installed
+---> Package zip.x86_64 0:3.0-11.el7 will be installed
+--> Running transaction check
+---> Package cpp.x86_64 0:4.8.5-39.el7 will be installed
+---> Package dwz.x86_64 0:0.11-3.el7 will be installed
+---> Package efivar-libs.x86_64 0:36-12.el7 will be installed
+---> Package fipscheck-lib.x86_64 0:1.4.1-6.el7 will be installed
+--> Processing Dependency: /usr/bin/fipscheck for package: fipscheck-lib-1.4.1-6.el7.x86_64
+---> Package kernel-headers.x86_64 0:3.10.0-1127.8.2.el7 will be installed
+---> Package libedit.x86_64 0:3.0-12.20121213cvs.el7 will be installed
+---> Package openssh.x86_64 0:7.4p1-21.el7 will be installed
+---> Package perl-Encode.x86_64 0:2.51-7.el7 will be installed
+---> Package perl-Pod-Escapes.noarch 1:1.04-295.el7 will be installed
+---> Package perl-Pod-Usage.noarch 0:1.63-3.el7 will be installed
+--> Processing Dependency: perl(Pod::Text) >= 3.15 for package: perl-Pod-Usage-1.63-3.el7.noarch
+--> Processing Dependency: perl-Pod-Perldoc for package: perl-Pod-Usage-1.63-3.el7.noarch
+---> Package perl-Text-ParseWords.noarch 0:3.29-4.el7 will be installed
+---> Package perl-srpm-macros.noarch 0:1-8.el7 will be installed
+---> Package python-srpm-macros.noarch 0:3-32.el7 will be installed
+---> Package xml-common.noarch 0:0.6.3-39.el7 will be installed
+--> Running transaction check
+---> Package fipscheck.x86_64 0:1.4.1-6.el7 will be installed
+---> Package perl-Pod-Perldoc.noarch 0:3.20-4.el7 will be installed
+--> Processing Dependency: perl(parent) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+--> Processing Dependency: perl(HTTP::Tiny) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+--> Processing Dependency: groff-base for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+---> Package perl-podlators.noarch 0:2.5.1-3.el7 will be installed
+--> Running transaction check
+---> Package groff-base.x86_64 0:1.22.2-8.el7 will be installed
+---> Package perl-HTTP-Tiny.noarch 0:0.033-3.el7 will be installed
+---> Package perl-parent.noarch 1:0.225-244.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                        Arch   Version             Repository      Size
+================================================================================
+Installing:
+ devtoolset-8                   x86_64 8.1-1.el7           centos-sclo-rh 5.4 k
+ rh-python36                    x86_64 2.0-1.el7           centos-sclo-rh 2.7 k
+Installing for dependencies:
+ audit-libs-python              x86_64 2.8.5-4.el7         base            76 k
+ avahi-libs                     x86_64 0.6.31-20.el7       base            62 k
+ boost-date-time                x86_64 1.53.0-28.el7       base            52 k
+ boost-system                   x86_64 1.53.0-28.el7       base            40 k
+ boost-thread                   x86_64 1.53.0-28.el7       base            58 k
+ checkpolicy                    x86_64 2.5-8.el7           base           295 k
+ cpp                            x86_64 4.8.5-39.el7        base           5.9 M
+ devtoolset-8-binutils          x86_64 2.30-55.el7.2       centos-sclo-rh 5.5 M
+ devtoolset-8-dwz               x86_64 0.12-1.1.el7        centos-sclo-rh  98 k
+ devtoolset-8-dyninst           x86_64 9.3.2-6.el7         centos-sclo-rh 3.6 M
+ devtoolset-8-elfutils          x86_64 0.176-1.el7         centos-sclo-rh 431 k
+ devtoolset-8-elfutils-libelf   x86_64 0.176-1.el7         centos-sclo-rh 202 k
+ devtoolset-8-elfutils-libs     x86_64 0.176-1.el7         centos-sclo-rh 311 k
+ devtoolset-8-gcc               x86_64 8.3.1-3.2.el7       centos-sclo-rh  30 M
+ devtoolset-8-gcc-c++           x86_64 8.3.1-3.2.el7       centos-sclo-rh  12 M
+ devtoolset-8-gcc-gfortran      x86_64 8.3.1-3.2.el7       centos-sclo-rh  12 M
+ devtoolset-8-gdb               x86_64 8.2-3.el7           centos-sclo-rh 3.4 M
+ devtoolset-8-libquadmath-devel x86_64 8.3.1-3.2.el7       centos-sclo-rh 155 k
+ devtoolset-8-libstdc++-devel   x86_64 8.3.1-3.2.el7       centos-sclo-rh 2.7 M
+ devtoolset-8-ltrace            x86_64 0.7.91-1.el7        centos-sclo-rh 148 k
+ devtoolset-8-make              x86_64 1:4.2.1-4.el7       centos-sclo-rh 485 k
+ devtoolset-8-memstomp          x86_64 0.1.5-5.el7         centos-sclo-rh 442 k
+ devtoolset-8-oprofile          x86_64 1.3.0-2.el7         centos-sclo-rh 1.8 M
+ devtoolset-8-perftools         x86_64 8.1-1.el7           centos-sclo-rh 2.8 k
+ devtoolset-8-runtime           x86_64 8.1-1.el7           centos-sclo-rh  20 k
+ devtoolset-8-strace            x86_64 4.24-4.el7          centos-sclo-rh 1.0 M
+ devtoolset-8-systemtap         x86_64 3.3-2.el7           centos-sclo-rh 144 k
+ devtoolset-8-systemtap-client  x86_64 3.3-2.el7           centos-sclo-rh 2.8 M
+ devtoolset-8-systemtap-devel   x86_64 3.3-2.el7           centos-sclo-rh 2.2 M
+ devtoolset-8-systemtap-runtime x86_64 3.3-2.el7           centos-sclo-rh 427 k
+ devtoolset-8-toolchain         x86_64 8.1-1.el7           centos-sclo-rh 3.0 k
+ devtoolset-8-valgrind          x86_64 1:3.14.0-16.el7     centos-sclo-rh  11 M
+ dwz                            x86_64 0.11-3.el7          base            99 k
+ efivar-libs                    x86_64 36-12.el7           base            88 k
+ fipscheck                      x86_64 1.4.1-6.el7         base            21 k
+ fipscheck-lib                  x86_64 1.4.1-6.el7         base            11 k
+ gcc                            x86_64 4.8.5-39.el7        base            16 M
+ glibc-devel                    x86_64 2.17-307.el7.1      base           1.1 M
+ glibc-headers                  x86_64 2.17-307.el7.1      base           689 k
+ groff-base                     x86_64 1.22.2-8.el7        base           942 k
+ iso-codes                      noarch 3.46-2.el7          base           2.7 M
+ kernel-debug-devel             x86_64 3.10.0-1127.8.2.el7 updates         18 M
+ kernel-headers                 x86_64 3.10.0-1127.8.2.el7 updates        8.9 M
+ libcgroup                      x86_64 0.41-21.el7         base            66 k
+ libedit                        x86_64 3.0-12.20121213cvs.el7
+                                                           base            92 k
+ libgfortran5                   x86_64 8.3.1-2.1.1.el7     base           796 k
+ libgomp                        x86_64 4.8.5-39.el7        base           158 k
+ libmpc                         x86_64 1.0.1-3.el7         base            51 k
+ libquadmath                    x86_64 4.8.5-39.el7        base           190 k
+ libselinux-python              x86_64 2.5-15.el7          base           236 k
+ libselinux-utils               x86_64 2.5-15.el7          base           151 k
+ libsemanage-python             x86_64 2.5-14.el7          base           113 k
+ make                           x86_64 1:3.82-24.el7       base           421 k
+ mokutil                        x86_64 15-2.el7.centos     base            42 k
+ mpfr                           x86_64 3.1.1-4.el7         base           203 k
+ openssh                        x86_64 7.4p1-21.el7        base           510 k
+ openssh-clients                x86_64 7.4p1-21.el7        base           655 k
+ perl                           x86_64 4:5.16.3-295.el7    base           8.0 M
+ perl-Carp                      noarch 1.26-244.el7        base            19 k
+ perl-Encode                    x86_64 2.51-7.el7          base           1.5 M
+ perl-Exporter                  noarch 5.68-3.el7          base            28 k
+ perl-File-Path                 noarch 2.09-2.el7          base            26 k
+ perl-File-Temp                 noarch 0.23.01-3.el7       base            56 k
+ perl-Filter                    x86_64 1.49-3.el7          base            76 k
+ perl-Getopt-Long               noarch 2.40-3.el7          base            56 k
+ perl-HTTP-Tiny                 noarch 0.033-3.el7         base            38 k
+ perl-PathTools                 x86_64 3.40-5.el7          base            82 k
+ perl-Pod-Escapes               noarch 1:1.04-295.el7      base            51 k
+ perl-Pod-Perldoc               noarch 3.20-4.el7          base            87 k
+ perl-Pod-Simple                noarch 1:3.28-4.el7        base           216 k
+ perl-Pod-Usage                 noarch 1.63-3.el7          base            27 k
+ perl-Scalar-List-Utils         x86_64 1.27-248.el7        base            36 k
+ perl-Socket                    x86_64 2.010-5.el7         base            49 k
+ perl-Storable                  x86_64 2.45-3.el7          base            77 k
+ perl-Text-ParseWords           noarch 3.29-4.el7          base            14 k
+ perl-Time-HiRes                x86_64 4:1.9725-3.el7      base            45 k
+ perl-Time-Local                noarch 1.2300-2.el7        base            24 k
+ perl-constant                  noarch 1.27-2.el7          base            19 k
+ perl-libs                      x86_64 4:5.16.3-295.el7    base           689 k
+ perl-macros                    x86_64 4:5.16.3-295.el7    base            44 k
+ perl-parent                    noarch 1:0.225-244.el7     base            12 k
+ perl-podlators                 noarch 2.5.1-3.el7         base           112 k
+ perl-srpm-macros               noarch 1-8.el7             base           4.6 k
+ perl-threads                   x86_64 1.87-4.el7          base            49 k
+ perl-threads-shared            x86_64 1.43-6.el7          base            39 k
+ policycoreutils                x86_64 2.5-34.el7          base           917 k
+ policycoreutils-python         x86_64 2.5-34.el7          base           457 k
+ python-IPy                     noarch 0.75-6.el7          base            32 k
+ python-srpm-macros             noarch 3-32.el7            base           8.4 k
+ redhat-rpm-config              noarch 9.1.0-88.el7.centos base            81 k
+ rh-python36-python             x86_64 3.6.9-2.el7         centos-sclo-rh  56 k
+ rh-python36-python-devel       x86_64 3.6.9-2.el7         centos-sclo-rh 841 k
+ rh-python36-python-libs        x86_64 3.6.9-2.el7         centos-sclo-rh 7.6 M
+ rh-python36-python-pip         noarch 9.0.1-2.el7         centos-sclo-rh 1.7 M
+ rh-python36-python-setuptools  noarch 36.5.0-1.el7        centos-sclo-rh 566 k
+ rh-python36-python-virtualenv  noarch 15.1.0-2.el7        centos-sclo-rh 1.8 M
+ rh-python36-runtime            x86_64 2.0-1.el7           centos-sclo-rh 1.1 M
+ scl-utils                      x86_64 20130529-19.el7     base            24 k
+ scl-utils-build                x86_64 20130529-19.el7     base            18 k
+ setools-libs                   x86_64 3.3.8-4.el7         base           620 k
+ unzip                          x86_64 6.0-21.el7          base           171 k
+ which                          x86_64 2.20-7.el7          base            41 k
+ xml-common                     noarch 0.6.3-39.el7        base            26 k
+ zip                            x86_64 3.0-11.el7          base           260 k
+
+Transaction Summary
+================================================================================
+Install  2 Packages (+104 Dependent packages)
+
+Total download size: 177 M
+Installed size: 497 M
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/centos-sclo-rh/packages/devtoolset-8-8.1-1.el7.x86_64.rpm: Header V4 RSA/SHA1 Signature, key ID f2ee9d55: NOKEY
+Public key for devtoolset-8-8.1-1.el7.x86_64.rpm is not installed
+--------------------------------------------------------------------------------
+Total                                               14 MB/s | 177 MB  00:12     
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+Importing GPG key 0xF2EE9D55:
+ Userid     : "CentOS SoftwareCollections SIG (https://wiki.centos.org/SpecialInterestGroup/SCLo) <security@centos.org>"
+ Fingerprint: c4db d535 b1fb ba14 f8ba 64a8 4eb8 4e71 f2ee 9d55
+ Package    : centos-release-scl-rh-2-3.el7.centos.noarch (@extras)
+ From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-SIG-SCLo
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : mpfr-3.1.1-4.el7.x86_64                                    1/106 
+  Installing : libmpc-1.0.1-3.el7.x86_64                                  2/106 
+  Installing : fipscheck-1.4.1-6.el7.x86_64                               3/106 
+  Installing : fipscheck-lib-1.4.1-6.el7.x86_64                           4/106 
+  Installing : zip-3.0-11.el7.x86_64                                      5/106 
+  Installing : libquadmath-4.8.5-39.el7.x86_64                            6/106 
+  Installing : libgomp-4.8.5-39.el7.x86_64                                7/106 
+  Installing : avahi-libs-0.6.31-20.el7.x86_64                            8/106 
+  Installing : boost-system-1.53.0-28.el7.x86_64                          9/106 
+  Installing : scl-utils-20130529-19.el7.x86_64                          10/106 
+  Installing : rh-python36-runtime-2.0-1.el7.x86_64                      11/106 
+  Installing : rh-python36-python-libs-3.6.9-2.el7.x86_64                12/106 
+  Installing : rh-python36-python-pip-9.0.1-2.el7.noarch                 13/106 
+  Installing : rh-python36-python-setuptools-36.5.0-1.el7.noarch         14/106 
+  Installing : rh-python36-python-3.6.9-2.el7.x86_64                     15/106 
+  Installing : boost-thread-1.53.0-28.el7.x86_64                         16/106 
+  Installing : libgfortran5-8.3.1-2.1.1.el7.x86_64                       17/106 
+  Installing : openssh-7.4p1-21.el7.x86_64                               18/106 
+  Installing : cpp-4.8.5-39.el7.x86_64                                   19/106 
+  Installing : libcgroup-0.41-21.el7.x86_64                              20/106 
+  Installing : xml-common-0.6.3-39.el7.noarch                            21/106 
+  Installing : iso-codes-3.46-2.el7.noarch                               22/106 
+  Installing : libselinux-python-2.5-15.el7.x86_64                       23/106 
+  Installing : libselinux-utils-2.5-15.el7.x86_64                        24/106 
+  Installing : policycoreutils-2.5-34.el7.x86_64                         25/106 
+  Installing : python-srpm-macros-3-32.el7.noarch                        26/106 
+  Installing : kernel-headers-3.10.0-1127.8.2.el7.x86_64                 27/106 
+  Installing : glibc-headers-2.17-307.el7.1.x86_64                       28/106 
+  Installing : glibc-devel-2.17-307.el7.1.x86_64                         29/106 
+  Installing : gcc-4.8.5-39.el7.x86_64                                   30/106 
+  Installing : dwz-0.11-3.el7.x86_64                                     31/106 
+  Installing : libsemanage-python-2.5-14.el7.x86_64                      32/106 
+  Installing : perl-srpm-macros-1-8.el7.noarch                           33/106 
+  Installing : audit-libs-python-2.8.5-4.el7.x86_64                      34/106 
+  Installing : boost-date-time-1.53.0-28.el7.x86_64                      35/106 
+  Installing : python-IPy-0.75-6.el7.noarch                              36/106 
+  Installing : checkpolicy-2.5-8.el7.x86_64                              37/106 
+  Installing : efivar-libs-36-12.el7.x86_64                              38/106 
+  Installing : mokutil-15-2.el7.centos.x86_64                            39/106 
+  Installing : setools-libs-3.3.8-4.el7.x86_64                           40/106 
+  Installing : policycoreutils-python-2.5-34.el7.x86_64                  41/106 
+  Installing : devtoolset-8-runtime-8.1-1.el7.x86_64                     42/106 
+ValueError: SELinux policy is not managed or store cannot be accessed.
+  Installing : devtoolset-8-dyninst-9.3.2-6.el7.x86_64                   43/106 
+  Installing : devtoolset-8-elfutils-libelf-0.176-1.el7.x86_64           44/106 
+  Installing : devtoolset-8-binutils-2.30-55.el7.2.x86_64                45/106 
+install-info: No such file or directory for /opt/rh/devtoolset-8/root/usr/share/info/as.info.gz
+install-info: No such file or directory for /opt/rh/devtoolset-8/root/usr/share/info/binutils.info.gz
+install-info: No such file or directory for /opt/rh/devtoolset-8/root/usr/share/info/gprof.info.gz
+install-info: No such file or directory for /opt/rh/devtoolset-8/root/usr/share/info/ld.info.gz
+install-info: No such file or directory for /opt/rh/devtoolset-8/root/usr/share/info/standards.info.gz
+  Installing : devtoolset-8-elfutils-libs-0.176-1.el7.x86_64             46/106 
+  Installing : devtoolset-8-elfutils-0.176-1.el7.x86_64                  47/106 
+  Installing : devtoolset-8-systemtap-runtime-3.3-2.el7.x86_64           48/106 
+  Installing : devtoolset-8-strace-4.24-4.el7.x86_64                     49/106 
+  Installing : 1:devtoolset-8-make-4.2.1-4.el7.x86_64                    50/106 
+  Installing : devtoolset-8-gdb-8.2-3.el7.x86_64                         51/106 
+  Installing : devtoolset-8-ltrace-0.7.91-1.el7.x86_64                   52/106 
+  Installing : devtoolset-8-libstdc++-devel-8.3.1-3.2.el7.x86_64         53/106 
+  Installing : devtoolset-8-memstomp-0.1.5-5.el7.x86_64                  54/106 
+  Installing : devtoolset-8-dwz-0.12-1.1.el7.x86_64                      55/106 
+  Installing : libedit-3.0-12.20121213cvs.el7.x86_64                     56/106 
+  Installing : openssh-clients-7.4p1-21.el7.x86_64                       57/106 
+  Installing : 1:make-3.82-24.el7.x86_64                                 58/106 
+  Installing : unzip-6.0-21.el7.x86_64                                   59/106 
+  Installing : groff-base-1.22.2-8.el7.x86_64                            60/106 
+  Installing : 1:perl-parent-0.225-244.el7.noarch                        61/106 
+  Installing : perl-HTTP-Tiny-0.033-3.el7.noarch                         62/106 
+  Installing : perl-podlators-2.5.1-3.el7.noarch                         63/106 
+  Installing : perl-Pod-Perldoc-3.20-4.el7.noarch                        64/106 
+  Installing : 1:perl-Pod-Escapes-1.04-295.el7.noarch                    65/106 
+  Installing : perl-Text-ParseWords-3.29-4.el7.noarch                    66/106 
+  Installing : perl-Encode-2.51-7.el7.x86_64                             67/106 
+  Installing : perl-Pod-Usage-1.63-3.el7.noarch                          68/106 
+  Installing : 4:perl-libs-5.16.3-295.el7.x86_64                         69/106 
+  Installing : 4:perl-macros-5.16.3-295.el7.x86_64                       70/106 
+  Installing : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                     71/106 
+  Installing : perl-threads-1.87-4.el7.x86_64                            72/106 
+  Installing : perl-Storable-2.45-3.el7.x86_64                           73/106 
+  Installing : perl-Carp-1.26-244.el7.noarch                             74/106 
+  Installing : perl-Filter-1.49-3.el7.x86_64                             75/106 
+  Installing : perl-Exporter-5.68-3.el7.noarch                           76/106 
+  Installing : perl-constant-1.27-2.el7.noarch                           77/106 
+  Installing : perl-Socket-2.010-5.el7.x86_64                            78/106 
+  Installing : perl-Time-Local-1.2300-2.el7.noarch                       79/106 
+  Installing : perl-threads-shared-1.43-6.el7.x86_64                     80/106 
+  Installing : perl-File-Temp-0.23.01-3.el7.noarch                       81/106 
+  Installing : perl-File-Path-2.09-2.el7.noarch                          82/106 
+  Installing : perl-PathTools-3.40-5.el7.x86_64                          83/106 
+  Installing : perl-Scalar-List-Utils-1.27-248.el7.x86_64                84/106 
+  Installing : 1:perl-Pod-Simple-3.28-4.el7.noarch                       85/106 
+  Installing : perl-Getopt-Long-2.40-3.el7.noarch                        86/106 
+  Installing : 4:perl-5.16.3-295.el7.x86_64                              87/106 
+  Installing : 1:devtoolset-8-valgrind-3.14.0-16.el7.x86_64              88/106 
+  Installing : kernel-debug-devel-3.10.0-1127.8.2.el7.x86_64             89/106 
+  Installing : devtoolset-8-systemtap-devel-3.3-2.el7.x86_64             90/106 
+  Installing : devtoolset-8-systemtap-client-3.3-2.el7.x86_64            91/106 
+  Installing : devtoolset-8-systemtap-3.3-2.el7.x86_64                   92/106 
+  Installing : redhat-rpm-config-9.1.0-88.el7.centos.noarch              93/106 
+  Installing : scl-utils-build-20130529-19.el7.x86_64                    94/106 
+  Installing : rh-python36-python-devel-3.6.9-2.el7.x86_64               95/106 
+  Installing : rh-python36-python-virtualenv-15.1.0-2.el7.noarch         96/106 
+  Installing : which-2.20-7.el7.x86_64                                   97/106 
+install-info: No such file or directory for /usr/share/info/which.info.gz
+  Installing : devtoolset-8-gcc-8.3.1-3.2.el7.x86_64                     98/106 
+  Installing : devtoolset-8-libquadmath-devel-8.3.1-3.2.el7.x86_64       99/106 
+  Installing : devtoolset-8-gcc-gfortran-8.3.1-3.2.el7.x86_64           100/106 
+  Installing : devtoolset-8-gcc-c++-8.3.1-3.2.el7.x86_64                101/106 
+  Installing : devtoolset-8-toolchain-8.1-1.el7.x86_64                  102/106 
+  Installing : devtoolset-8-oprofile-1.3.0-2.el7.x86_64                 103/106 
+  Installing : devtoolset-8-perftools-8.1-1.el7.x86_64                  104/106 
+  Installing : devtoolset-8-8.1-1.el7.x86_64                            105/106 
+  Installing : rh-python36-2.0-1.el7.x86_64                             106/106 
+  Verifying  : fipscheck-lib-1.4.1-6.el7.x86_64                           1/106 
+  Verifying  : perl-HTTP-Tiny-0.033-3.el7.noarch                          2/106 
+  Verifying  : devtoolset-8-toolchain-8.1-1.el7.x86_64                    3/106 
+  Verifying  : gcc-4.8.5-39.el7.x86_64                                    4/106 
+  Verifying  : devtoolset-8-strace-4.24-4.el7.x86_64                      5/106 
+  Verifying  : rh-python36-python-virtualenv-15.1.0-2.el7.noarch          6/106 
+  Verifying  : rh-python36-2.0-1.el7.x86_64                               7/106 
+  Verifying  : which-2.20-7.el7.x86_64                                    8/106 
+  Verifying  : 4:perl-libs-5.16.3-295.el7.x86_64                          9/106 
+  Verifying  : groff-base-1.22.2-8.el7.x86_64                            10/106 
+  Verifying  : perl-File-Temp-0.23.01-3.el7.noarch                       11/106 
+  Verifying  : 1:devtoolset-8-valgrind-3.14.0-16.el7.x86_64              12/106 
+  Verifying  : 4:perl-macros-5.16.3-295.el7.x86_64                       13/106 
+  Verifying  : unzip-6.0-21.el7.x86_64                                   14/106 
+  Verifying  : fipscheck-1.4.1-6.el7.x86_64                              15/106 
+  Verifying  : 1:make-3.82-24.el7.x86_64                                 16/106 
+  Verifying  : glibc-headers-2.17-307.el7.1.x86_64                       17/106 
+  Verifying  : perl-File-Path-2.09-2.el7.noarch                          18/106 
+  Verifying  : devtoolset-8-libquadmath-devel-8.3.1-3.2.el7.x86_64       19/106 
+  Verifying  : libedit-3.0-12.20121213cvs.el7.x86_64                     20/106 
+  Verifying  : perl-Text-ParseWords-3.29-4.el7.noarch                    21/106 
+  Verifying  : iso-codes-3.46-2.el7.noarch                               22/106 
+  Verifying  : devtoolset-8-gcc-gfortran-8.3.1-3.2.el7.x86_64            23/106 
+  Verifying  : setools-libs-3.3.8-4.el7.x86_64                           24/106 
+  Verifying  : 1:devtoolset-8-make-4.2.1-4.el7.x86_64                    25/106 
+  Verifying  : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                     26/106 
+  Verifying  : 1:perl-Pod-Escapes-1.04-295.el7.noarch                    27/106 
+  Verifying  : efivar-libs-36-12.el7.x86_64                              28/106 
+  Verifying  : rh-python36-python-3.6.9-2.el7.x86_64                     29/106 
+  Verifying  : checkpolicy-2.5-8.el7.x86_64                              30/106 
+  Verifying  : scl-utils-20130529-19.el7.x86_64                          31/106 
+  Verifying  : devtoolset-8-gdb-8.2-3.el7.x86_64                         32/106 
+  Verifying  : devtoolset-8-gcc-8.3.1-3.2.el7.x86_64                     33/106 
+  Verifying  : devtoolset-8-perftools-8.1-1.el7.x86_64                   34/106 
+  Verifying  : python-IPy-0.75-6.el7.noarch                              35/106 
+  Verifying  : devtoolset-8-systemtap-3.3-2.el7.x86_64                   36/106 
+  Verifying  : boost-date-time-1.53.0-28.el7.x86_64                      37/106 
+  Verifying  : 4:perl-5.16.3-295.el7.x86_64                              38/106 
+  Verifying  : scl-utils-build-20130529-19.el7.x86_64                    39/106 
+  Verifying  : boost-system-1.53.0-28.el7.x86_64                         40/106 
+  Verifying  : devtoolset-8-systemtap-devel-3.3-2.el7.x86_64             41/106 
+  Verifying  : openssh-clients-7.4p1-21.el7.x86_64                       42/106 
+  Verifying  : libmpc-1.0.1-3.el7.x86_64                                 43/106 
+  Verifying  : kernel-debug-devel-3.10.0-1127.8.2.el7.x86_64             44/106 
+  Verifying  : audit-libs-python-2.8.5-4.el7.x86_64                      45/106 
+  Verifying  : perl-Pod-Usage-1.63-3.el7.noarch                          46/106 
+  Verifying  : perl-Encode-2.51-7.el7.x86_64                             47/106 
+  Verifying  : mokutil-15-2.el7.centos.x86_64                            48/106 
+  Verifying  : devtoolset-8-ltrace-0.7.91-1.el7.x86_64                   49/106 
+  Verifying  : perl-threads-1.87-4.el7.x86_64                            50/106 
+  Verifying  : devtoolset-8-dyninst-9.3.2-6.el7.x86_64                   51/106 
+  Verifying  : perl-Getopt-Long-2.40-3.el7.noarch                        52/106 
+  Verifying  : cpp-4.8.5-39.el7.x86_64                                   53/106 
+  Verifying  : avahi-libs-0.6.31-20.el7.x86_64                           54/106 
+  Verifying  : boost-thread-1.53.0-28.el7.x86_64                         55/106 
+  Verifying  : perl-threads-shared-1.43-6.el7.x86_64                     56/106 
+  Verifying  : perl-Storable-2.45-3.el7.x86_64                           57/106 
+  Verifying  : devtoolset-8-elfutils-libs-0.176-1.el7.x86_64             58/106 
+  Verifying  : devtoolset-8-elfutils-0.176-1.el7.x86_64                  59/106 
+  Verifying  : 1:perl-parent-0.225-244.el7.noarch                        60/106 
+  Verifying  : devtoolset-8-gcc-c++-8.3.1-3.2.el7.x86_64                 61/106 
+  Verifying  : devtoolset-8-elfutils-libelf-0.176-1.el7.x86_64           62/106 
+  Verifying  : policycoreutils-2.5-34.el7.x86_64                         63/106 
+  Verifying  : perl-srpm-macros-1-8.el7.noarch                           64/106 
+  Verifying  : libgomp-4.8.5-39.el7.x86_64                               65/106 
+  Verifying  : rh-python36-python-pip-9.0.1-2.el7.noarch                 66/106 
+  Verifying  : policycoreutils-python-2.5-34.el7.x86_64                  67/106 
+  Verifying  : devtoolset-8-oprofile-1.3.0-2.el7.x86_64                  68/106 
+  Verifying  : devtoolset-8-8.1-1.el7.x86_64                             69/106 
+  Verifying  : perl-Carp-1.26-244.el7.noarch                             70/106 
+  Verifying  : libsemanage-python-2.5-14.el7.x86_64                      71/106 
+  Verifying  : rh-python36-python-devel-3.6.9-2.el7.x86_64               72/106 
+  Verifying  : devtoolset-8-systemtap-client-3.3-2.el7.x86_64            73/106 
+  Verifying  : perl-Pod-Perldoc-3.20-4.el7.noarch                        74/106 
+  Verifying  : mpfr-3.1.1-4.el7.x86_64                                   75/106 
+  Verifying  : libquadmath-4.8.5-39.el7.x86_64                           76/106 
+  Verifying  : perl-Filter-1.49-3.el7.x86_64                             77/106 
+  Verifying  : dwz-0.11-3.el7.x86_64                                     78/106 
+  Verifying  : rh-python36-runtime-2.0-1.el7.x86_64                      79/106 
+  Verifying  : perl-Exporter-5.68-3.el7.noarch                           80/106 
+  Verifying  : perl-constant-1.27-2.el7.noarch                           81/106 
+  Verifying  : perl-PathTools-3.40-5.el7.x86_64                          82/106 
+  Verifying  : kernel-headers-3.10.0-1127.8.2.el7.x86_64                 83/106 
+  Verifying  : perl-Socket-2.010-5.el7.x86_64                            84/106 
+  Verifying  : openssh-7.4p1-21.el7.x86_64                               85/106 
+  Verifying  : devtoolset-8-libstdc++-devel-8.3.1-3.2.el7.x86_64         86/106 
+  Verifying  : devtoolset-8-runtime-8.1-1.el7.x86_64                     87/106 
+  Verifying  : 1:perl-Pod-Simple-3.28-4.el7.noarch                       88/106 
+  Verifying  : python-srpm-macros-3-32.el7.noarch                        89/106 
+  Verifying  : perl-Time-Local-1.2300-2.el7.noarch                       90/106 
+  Verifying  : libselinux-utils-2.5-15.el7.x86_64                        91/106 
+  Verifying  : devtoolset-8-systemtap-runtime-3.3-2.el7.x86_64           92/106 
+  Verifying  : devtoolset-8-binutils-2.30-55.el7.2.x86_64                93/106 
+  Verifying  : libselinux-python-2.5-15.el7.x86_64                       94/106 
+  Verifying  : perl-Scalar-List-Utils-1.27-248.el7.x86_64                95/106 
+  Verifying  : rh-python36-python-libs-3.6.9-2.el7.x86_64                96/106 
+  Verifying  : devtoolset-8-memstomp-0.1.5-5.el7.x86_64                  97/106 
+  Verifying  : libgfortran5-8.3.1-2.1.1.el7.x86_64                       98/106 
+  Verifying  : xml-common-0.6.3-39.el7.noarch                            99/106 
+  Verifying  : perl-podlators-2.5.1-3.el7.noarch                        100/106 
+  Verifying  : glibc-devel-2.17-307.el7.1.x86_64                        101/106 
+  Verifying  : zip-3.0-11.el7.x86_64                                    102/106 
+  Verifying  : libcgroup-0.41-21.el7.x86_64                             103/106 
+  Verifying  : rh-python36-python-setuptools-36.5.0-1.el7.noarch        104/106 
+  Verifying  : devtoolset-8-dwz-0.12-1.1.el7.x86_64                     105/106 
+  Verifying  : redhat-rpm-config-9.1.0-88.el7.centos.noarch             106/106 
+
+Installed:
+  devtoolset-8.x86_64 0:8.1-1.el7         rh-python36.x86_64 0:2.0-1.el7        
+
+Dependency Installed:
+  audit-libs-python.x86_64 0:2.8.5-4.el7                                        
+  avahi-libs.x86_64 0:0.6.31-20.el7                                             
+  boost-date-time.x86_64 0:1.53.0-28.el7                                        
+  boost-system.x86_64 0:1.53.0-28.el7                                           
+  boost-thread.x86_64 0:1.53.0-28.el7                                           
+  checkpolicy.x86_64 0:2.5-8.el7                                                
+  cpp.x86_64 0:4.8.5-39.el7                                                     
+  devtoolset-8-binutils.x86_64 0:2.30-55.el7.2                                  
+  devtoolset-8-dwz.x86_64 0:0.12-1.1.el7                                        
+  devtoolset-8-dyninst.x86_64 0:9.3.2-6.el7                                     
+  devtoolset-8-elfutils.x86_64 0:0.176-1.el7                                    
+  devtoolset-8-elfutils-libelf.x86_64 0:0.176-1.el7                             
+  devtoolset-8-elfutils-libs.x86_64 0:0.176-1.el7                               
+  devtoolset-8-gcc.x86_64 0:8.3.1-3.2.el7                                       
+  devtoolset-8-gcc-c++.x86_64 0:8.3.1-3.2.el7                                   
+  devtoolset-8-gcc-gfortran.x86_64 0:8.3.1-3.2.el7                              
+  devtoolset-8-gdb.x86_64 0:8.2-3.el7                                           
+  devtoolset-8-libquadmath-devel.x86_64 0:8.3.1-3.2.el7                         
+  devtoolset-8-libstdc++-devel.x86_64 0:8.3.1-3.2.el7                           
+  devtoolset-8-ltrace.x86_64 0:0.7.91-1.el7                                     
+  devtoolset-8-make.x86_64 1:4.2.1-4.el7                                        
+  devtoolset-8-memstomp.x86_64 0:0.1.5-5.el7                                    
+  devtoolset-8-oprofile.x86_64 0:1.3.0-2.el7                                    
+  devtoolset-8-perftools.x86_64 0:8.1-1.el7                                     
+  devtoolset-8-runtime.x86_64 0:8.1-1.el7                                       
+  devtoolset-8-strace.x86_64 0:4.24-4.el7                                       
+  devtoolset-8-systemtap.x86_64 0:3.3-2.el7                                     
+  devtoolset-8-systemtap-client.x86_64 0:3.3-2.el7                              
+  devtoolset-8-systemtap-devel.x86_64 0:3.3-2.el7                               
+  devtoolset-8-systemtap-runtime.x86_64 0:3.3-2.el7                             
+  devtoolset-8-toolchain.x86_64 0:8.1-1.el7                                     
+  devtoolset-8-valgrind.x86_64 1:3.14.0-16.el7                                  
+  dwz.x86_64 0:0.11-3.el7                                                       
+  efivar-libs.x86_64 0:36-12.el7                                                
+  fipscheck.x86_64 0:1.4.1-6.el7                                                
+  fipscheck-lib.x86_64 0:1.4.1-6.el7                                            
+  gcc.x86_64 0:4.8.5-39.el7                                                     
+  glibc-devel.x86_64 0:2.17-307.el7.1                                           
+  glibc-headers.x86_64 0:2.17-307.el7.1                                         
+  groff-base.x86_64 0:1.22.2-8.el7                                              
+  iso-codes.noarch 0:3.46-2.el7                                                 
+  kernel-debug-devel.x86_64 0:3.10.0-1127.8.2.el7                               
+  kernel-headers.x86_64 0:3.10.0-1127.8.2.el7                                   
+  libcgroup.x86_64 0:0.41-21.el7                                                
+  libedit.x86_64 0:3.0-12.20121213cvs.el7                                       
+  libgfortran5.x86_64 0:8.3.1-2.1.1.el7                                         
+  libgomp.x86_64 0:4.8.5-39.el7                                                 
+  libmpc.x86_64 0:1.0.1-3.el7                                                   
+  libquadmath.x86_64 0:4.8.5-39.el7                                             
+  libselinux-python.x86_64 0:2.5-15.el7                                         
+  libselinux-utils.x86_64 0:2.5-15.el7                                          
+  libsemanage-python.x86_64 0:2.5-14.el7                                        
+  make.x86_64 1:3.82-24.el7                                                     
+  mokutil.x86_64 0:15-2.el7.centos                                              
+  mpfr.x86_64 0:3.1.1-4.el7                                                     
+  openssh.x86_64 0:7.4p1-21.el7                                                 
+  openssh-clients.x86_64 0:7.4p1-21.el7                                         
+  perl.x86_64 4:5.16.3-295.el7                                                  
+  perl-Carp.noarch 0:1.26-244.el7                                               
+  perl-Encode.x86_64 0:2.51-7.el7                                               
+  perl-Exporter.noarch 0:5.68-3.el7                                             
+  perl-File-Path.noarch 0:2.09-2.el7                                            
+  perl-File-Temp.noarch 0:0.23.01-3.el7                                         
+  perl-Filter.x86_64 0:1.49-3.el7                                               
+  perl-Getopt-Long.noarch 0:2.40-3.el7                                          
+  perl-HTTP-Tiny.noarch 0:0.033-3.el7                                           
+  perl-PathTools.x86_64 0:3.40-5.el7                                            
+  perl-Pod-Escapes.noarch 1:1.04-295.el7                                        
+  perl-Pod-Perldoc.noarch 0:3.20-4.el7                                          
+  perl-Pod-Simple.noarch 1:3.28-4.el7                                           
+  perl-Pod-Usage.noarch 0:1.63-3.el7                                            
+  perl-Scalar-List-Utils.x86_64 0:1.27-248.el7                                  
+  perl-Socket.x86_64 0:2.010-5.el7                                              
+  perl-Storable.x86_64 0:2.45-3.el7                                             
+  perl-Text-ParseWords.noarch 0:3.29-4.el7                                      
+  perl-Time-HiRes.x86_64 4:1.9725-3.el7                                         
+  perl-Time-Local.noarch 0:1.2300-2.el7                                         
+  perl-constant.noarch 0:1.27-2.el7                                             
+  perl-libs.x86_64 4:5.16.3-295.el7                                             
+  perl-macros.x86_64 4:5.16.3-295.el7                                           
+  perl-parent.noarch 1:0.225-244.el7                                            
+  perl-podlators.noarch 0:2.5.1-3.el7                                           
+  perl-srpm-macros.noarch 0:1-8.el7                                             
+  perl-threads.x86_64 0:1.87-4.el7                                              
+  perl-threads-shared.x86_64 0:1.43-6.el7                                       
+  policycoreutils.x86_64 0:2.5-34.el7                                           
+  policycoreutils-python.x86_64 0:2.5-34.el7                                    
+  python-IPy.noarch 0:0.75-6.el7                                                
+  python-srpm-macros.noarch 0:3-32.el7                                          
+  redhat-rpm-config.noarch 0:9.1.0-88.el7.centos                                
+  rh-python36-python.x86_64 0:3.6.9-2.el7                                       
+  rh-python36-python-devel.x86_64 0:3.6.9-2.el7                                 
+  rh-python36-python-libs.x86_64 0:3.6.9-2.el7                                  
+  rh-python36-python-pip.noarch 0:9.0.1-2.el7                                   
+  rh-python36-python-setuptools.noarch 0:36.5.0-1.el7                           
+  rh-python36-python-virtualenv.noarch 0:15.1.0-2.el7                           
+  rh-python36-runtime.x86_64 0:2.0-1.el7                                        
+  scl-utils.x86_64 0:20130529-19.el7                                            
+  scl-utils-build.x86_64 0:20130529-19.el7                                      
+  setools-libs.x86_64 0:3.3.8-4.el7                                             
+  unzip.x86_64 0:6.0-21.el7                                                     
+  which.x86_64 0:2.20-7.el7                                                     
+  xml-common.noarch 0:0.6.3-39.el7                                              
+  zip.x86_64 0:3.0-11.el7                                                       
+
+Complete!
+fefb3c4392b768c65180eb58c4e6a30e40253071342e645503989f207c08c09d
+STEP 7: RUN yum update -y && yum install -y     ca-certificates     build-essential     git     curl     wget     unzip     which     python-setuptools     cmake tkinter numactl     libSM libXext     openmpi-devel     openssh openssh-server
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: reflector.westga.edu
+ * centos-sclo-rh: packages.oit.ncsu.edu
+ * centos-sclo-sclo: distro.ibiblio.org
+ * extras: mirror.metrocast.net
+ * updates: distro.ibiblio.org
+Resolving Dependencies
+--> Running transaction check
+---> Package bind-license.noarch 32:9.11.4-16.P2.el7_8.2 will be updated
+---> Package bind-license.noarch 32:9.11.4-16.P2.el7_8.3 will be an update
+---> Package binutils.x86_64 0:2.27-43.base.el7 will be updated
+---> Package binutils.x86_64 0:2.27-43.base.el7_8.1 will be an update
+---> Package device-mapper.x86_64 7:1.02.164-7.el7_8.1 will be updated
+---> Package device-mapper.x86_64 7:1.02.164-7.el7_8.2 will be an update
+---> Package device-mapper-libs.x86_64 7:1.02.164-7.el7_8.1 will be updated
+---> Package device-mapper-libs.x86_64 7:1.02.164-7.el7_8.2 will be an update
+---> Package systemd.x86_64 0:219-73.el7_8.5 will be updated
+---> Package systemd.x86_64 0:219-73.el7_8.6 will be an update
+---> Package systemd-libs.x86_64 0:219-73.el7_8.5 will be updated
+---> Package systemd-libs.x86_64 0:219-73.el7_8.6 will be an update
+---> Package yum-plugin-fastestmirror.noarch 0:1.1.31-53.el7 will be updated
+---> Package yum-plugin-fastestmirror.noarch 0:1.1.31-54.el7_8 will be an update
+---> Package yum-plugin-ovl.noarch 0:1.1.31-53.el7 will be updated
+---> Package yum-plugin-ovl.noarch 0:1.1.31-54.el7_8 will be an update
+---> Package yum-utils.noarch 0:1.1.31-53.el7 will be updated
+---> Package yum-utils.noarch 0:1.1.31-54.el7_8 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                    Arch     Version                    Repository
+                                                                           Size
+================================================================================
+Updating:
+ bind-license               noarch   32:9.11.4-16.P2.el7_8.3    updates    89 k
+ binutils                   x86_64   2.27-43.base.el7_8.1       updates   5.9 M
+ device-mapper              x86_64   7:1.02.164-7.el7_8.2       updates   295 k
+ device-mapper-libs         x86_64   7:1.02.164-7.el7_8.2       updates   324 k
+ systemd                    x86_64   219-73.el7_8.6             updates   5.1 M
+ systemd-libs               x86_64   219-73.el7_8.6             updates   416 k
+ yum-plugin-fastestmirror   noarch   1.1.31-54.el7_8            updates    34 k
+ yum-plugin-ovl             noarch   1.1.31-54.el7_8            updates    28 k
+ yum-utils                  noarch   1.1.31-54.el7_8            updates   122 k
+
+Transaction Summary
+================================================================================
+Upgrade  9 Packages
+
+Total download size: 12 M
+Downloading packages:
+Delta RPMs disabled because /usr/bin/applydeltarpm not installed.
+--------------------------------------------------------------------------------
+Total                                              6.3 MB/s |  12 MB  00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : systemd-libs-219-73.el7_8.6.x86_64                          1/18 
+  Updating   : systemd-219-73.el7_8.6.x86_64                               2/18 
+Failed to get D-Bus connection: Operation not permitted
+  Updating   : 7:device-mapper-libs-1.02.164-7.el7_8.2.x86_64              3/18 
+  Updating   : 7:device-mapper-1.02.164-7.el7_8.2.x86_64                   4/18 
+  Updating   : yum-utils-1.1.31-54.el7_8.noarch                            5/18 
+  Updating   : yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch             6/18 
+  Updating   : 32:bind-license-9.11.4-16.P2.el7_8.3.noarch                 7/18 
+  Updating   : binutils-2.27-43.base.el7_8.1.x86_64                        8/18 
+install-info: No such file or directory for /usr/share/info/as.info.gz
+install-info: No such file or directory for /usr/share/info/binutils.info.gz
+install-info: No such file or directory for /usr/share/info/gprof.info.gz
+install-info: No such file or directory for /usr/share/info/ld.info.gz
+install-info: No such file or directory for /usr/share/info/standards.info.gz
+  Updating   : yum-plugin-ovl-1.1.31-54.el7_8.noarch                       9/18 
+  Cleanup    : yum-utils-1.1.31-53.el7.noarch                             10/18 
+  Cleanup    : yum-plugin-fastestmirror-1.1.31-53.el7.noarch              11/18 
+  Cleanup    : 32:bind-license-9.11.4-16.P2.el7_8.2.noarch                12/18 
+  Cleanup    : yum-plugin-ovl-1.1.31-53.el7.noarch                        13/18 
+  Cleanup    : 7:device-mapper-libs-1.02.164-7.el7_8.1.x86_64             14/18 
+  Cleanup    : 7:device-mapper-1.02.164-7.el7_8.1.x86_64                  15/18 
+  Cleanup    : systemd-219-73.el7_8.5.x86_64                              16/18 
+  Cleanup    : systemd-libs-219-73.el7_8.5.x86_64                         17/18 
+  Cleanup    : binutils-2.27-43.base.el7.x86_64                           18/18 
+  Verifying  : 7:device-mapper-1.02.164-7.el7_8.2.x86_64                   1/18 
+  Verifying  : systemd-219-73.el7_8.6.x86_64                               2/18 
+  Verifying  : yum-plugin-ovl-1.1.31-54.el7_8.noarch                       3/18 
+  Verifying  : systemd-libs-219-73.el7_8.6.x86_64                          4/18 
+  Verifying  : binutils-2.27-43.base.el7_8.1.x86_64                        5/18 
+  Verifying  : 32:bind-license-9.11.4-16.P2.el7_8.3.noarch                 6/18 
+  Verifying  : 7:device-mapper-libs-1.02.164-7.el7_8.2.x86_64              7/18 
+  Verifying  : yum-plugin-fastestmirror-1.1.31-54.el7_8.noarch             8/18 
+  Verifying  : yum-utils-1.1.31-54.el7_8.noarch                            9/18 
+  Verifying  : systemd-219-73.el7_8.5.x86_64                              10/18 
+  Verifying  : yum-utils-1.1.31-53.el7.noarch                             11/18 
+  Verifying  : 32:bind-license-9.11.4-16.P2.el7_8.2.noarch                12/18 
+  Verifying  : yum-plugin-ovl-1.1.31-53.el7.noarch                        13/18 
+  Verifying  : binutils-2.27-43.base.el7.x86_64                           14/18 
+  Verifying  : 7:device-mapper-libs-1.02.164-7.el7_8.1.x86_64             15/18 
+  Verifying  : systemd-libs-219-73.el7_8.5.x86_64                         16/18 
+  Verifying  : yum-plugin-fastestmirror-1.1.31-53.el7.noarch              17/18 
+  Verifying  : 7:device-mapper-1.02.164-7.el7_8.1.x86_64                  18/18 
+
+Updated:
+  bind-license.noarch 32:9.11.4-16.P2.el7_8.3                                   
+  binutils.x86_64 0:2.27-43.base.el7_8.1                                        
+  device-mapper.x86_64 7:1.02.164-7.el7_8.2                                     
+  device-mapper-libs.x86_64 7:1.02.164-7.el7_8.2                                
+  systemd.x86_64 0:219-73.el7_8.6                                               
+  systemd-libs.x86_64 0:219-73.el7_8.6                                          
+  yum-plugin-fastestmirror.noarch 0:1.1.31-54.el7_8                             
+  yum-plugin-ovl.noarch 0:1.1.31-54.el7_8                                       
+  yum-utils.noarch 0:1.1.31-54.el7_8                                            
+
+Complete!
+Loaded plugins: fastestmirror, ovl
+Loading mirror speeds from cached hostfile
+ * base: reflector.westga.edu
+ * centos-sclo-rh: packages.oit.ncsu.edu
+ * centos-sclo-sclo: distro.ibiblio.org
+ * extras: mirror.metrocast.net
+ * updates: distro.ibiblio.org
+Package ca-certificates-2019.2.32-76.el7_7.noarch already installed and latest version
+No package build-essential available.
+Package curl-7.29.0-57.el7.x86_64 already installed and latest version
+Package unzip-6.0-21.el7.x86_64 already installed and latest version
+Package which-2.20-7.el7.x86_64 already installed and latest version
+Package openssh-7.4p1-21.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package cmake.x86_64 0:2.8.12.2-2.el7 will be installed
+--> Processing Dependency: libarchive.so.13()(64bit) for package: cmake-2.8.12.2-2.el7.x86_64
+---> Package git.x86_64 0:1.8.3.1-22.el7_8 will be installed
+--> Processing Dependency: perl-Git = 1.8.3.1-22.el7_8 for package: git-1.8.3.1-22.el7_8.x86_64
+--> Processing Dependency: rsync for package: git-1.8.3.1-22.el7_8.x86_64
+--> Processing Dependency: perl(Term::ReadKey) for package: git-1.8.3.1-22.el7_8.x86_64
+--> Processing Dependency: perl(Git) for package: git-1.8.3.1-22.el7_8.x86_64
+--> Processing Dependency: perl(Error) for package: git-1.8.3.1-22.el7_8.x86_64
+--> Processing Dependency: less for package: git-1.8.3.1-22.el7_8.x86_64
+---> Package libSM.x86_64 0:1.2.2-2.el7 will be installed
+--> Processing Dependency: libICE.so.6()(64bit) for package: libSM-1.2.2-2.el7.x86_64
+---> Package libXext.x86_64 0:1.3.3-3.el7 will be installed
+--> Processing Dependency: libX11 >= 1.5.99.902 for package: libXext-1.3.3-3.el7.x86_64
+--> Processing Dependency: libX11.so.6()(64bit) for package: libXext-1.3.3-3.el7.x86_64
+---> Package numactl.x86_64 0:2.0.12-5.el7 will be installed
+--> Processing Dependency: libnuma.so.1(libnuma_1.4)(64bit) for package: numactl-2.0.12-5.el7.x86_64
+--> Processing Dependency: libnuma.so.1(libnuma_1.3)(64bit) for package: numactl-2.0.12-5.el7.x86_64
+--> Processing Dependency: libnuma.so.1(libnuma_1.2)(64bit) for package: numactl-2.0.12-5.el7.x86_64
+--> Processing Dependency: libnuma.so.1(libnuma_1.1)(64bit) for package: numactl-2.0.12-5.el7.x86_64
+--> Processing Dependency: libnuma.so.1()(64bit) for package: numactl-2.0.12-5.el7.x86_64
+---> Package openmpi-devel.x86_64 0:1.10.7-5.el7 will be installed
+--> Processing Dependency: openmpi = 1.10.7-5.el7 for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: gcc-gfortran for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: libotfaux.so.0()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: liboshmem.so.8()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: libmpi_usempi.so.5()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: libmpi_mpifh.so.12()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: libmpi_cxx.so.1()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: libmpi.so.12()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+--> Processing Dependency: libhwloc.so.5()(64bit) for package: openmpi-devel-1.10.7-5.el7.x86_64
+---> Package openssh-server.x86_64 0:7.4p1-21.el7 will be installed
+--> Processing Dependency: libwrap.so.0()(64bit) for package: openssh-server-7.4p1-21.el7.x86_64
+---> Package python-setuptools.noarch 0:0.9.8-7.el7 will be installed
+--> Processing Dependency: python-backports-ssl_match_hostname for package: python-setuptools-0.9.8-7.el7.noarch
+---> Package tkinter.x86_64 0:2.7.5-88.el7 will be installed
+--> Processing Dependency: libtk8.5.so()(64bit) for package: tkinter-2.7.5-88.el7.x86_64
+--> Processing Dependency: libtcl8.5.so()(64bit) for package: tkinter-2.7.5-88.el7.x86_64
+--> Processing Dependency: libTix.so()(64bit) for package: tkinter-2.7.5-88.el7.x86_64
+---> Package wget.x86_64 0:1.14-18.el7_6.1 will be installed
+--> Running transaction check
+---> Package gcc-gfortran.x86_64 0:4.8.5-39.el7 will be installed
+--> Processing Dependency: libquadmath-devel = 4.8.5-39.el7 for package: gcc-gfortran-4.8.5-39.el7.x86_64
+--> Processing Dependency: libgfortran = 4.8.5-39.el7 for package: gcc-gfortran-4.8.5-39.el7.x86_64
+--> Processing Dependency: libgfortran.so.3()(64bit) for package: gcc-gfortran-4.8.5-39.el7.x86_64
+---> Package hwloc-libs.x86_64 0:1.11.8-4.el7 will be installed
+--> Processing Dependency: libltdl.so.7()(64bit) for package: hwloc-libs-1.11.8-4.el7.x86_64
+---> Package less.x86_64 0:458-9.el7 will be installed
+---> Package libICE.x86_64 0:1.0.9-9.el7 will be installed
+---> Package libX11.x86_64 0:1.6.7-2.el7 will be installed
+--> Processing Dependency: libX11-common >= 1.6.7-2.el7 for package: libX11-1.6.7-2.el7.x86_64
+--> Processing Dependency: libxcb.so.1()(64bit) for package: libX11-1.6.7-2.el7.x86_64
+---> Package libarchive.x86_64 0:3.1.2-14.el7_7 will be installed
+--> Processing Dependency: liblzo2.so.2()(64bit) for package: libarchive-3.1.2-14.el7_7.x86_64
+---> Package numactl-libs.x86_64 0:2.0.12-5.el7 will be installed
+---> Package openmpi.x86_64 0:1.10.7-5.el7 will be installed
+--> Processing Dependency: librdmacm.so.1(RDMACM_1.0)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libpsm2.so.2(PSM2_1.0)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libibverbs.so.1(IBVERBS_1.1)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libibverbs.so.1(IBVERBS_1.0)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libfabric.so.1(FABRIC_1.2)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libfabric.so.1(FABRIC_1.1)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libfabric.so.1(FABRIC_1.0)(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: environment-modules for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libucp.so.0()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: librdmacm.so.1()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libpsm_infinipath.so.1()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libpsm2.so.2()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libosmcomp.so.4()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libibverbs.so.1()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+--> Processing Dependency: libfabric.so.1()(64bit) for package: openmpi-1.10.7-5.el7.x86_64
+---> Package perl-Error.noarch 1:0.17020-2.el7 will be installed
+---> Package perl-Git.noarch 0:1.8.3.1-22.el7_8 will be installed
+---> Package perl-TermReadKey.x86_64 0:2.30-20.el7 will be installed
+---> Package python-backports-ssl_match_hostname.noarch 0:3.5.0.1-1.el7 will be installed
+--> Processing Dependency: python-ipaddress for package: python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch
+--> Processing Dependency: python-backports for package: python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch
+---> Package rsync.x86_64 0:3.1.2-10.el7 will be installed
+---> Package tcl.x86_64 1:8.5.13-8.el7 will be installed
+---> Package tcp_wrappers-libs.x86_64 0:7.6-77.el7 will be installed
+---> Package tix.x86_64 1:8.4.3-12.el7 will be installed
+---> Package tk.x86_64 1:8.5.13-6.el7 will be installed
+--> Processing Dependency: libfreetype.so.6()(64bit) for package: 1:tk-8.5.13-6.el7.x86_64
+--> Processing Dependency: libXft.so.2()(64bit) for package: 1:tk-8.5.13-6.el7.x86_64
+--> Running transaction check
+---> Package environment-modules.x86_64 0:3.2.10-10.el7 will be installed
+---> Package freetype.x86_64 0:2.8-14.el7 will be installed
+--> Processing Dependency: libpng15.so.15(PNG15_0)(64bit) for package: freetype-2.8-14.el7.x86_64
+--> Processing Dependency: libpng15.so.15()(64bit) for package: freetype-2.8-14.el7.x86_64
+---> Package infinipath-psm.x86_64 0:3.3-26_g604758e_open.2.el7 will be installed
+---> Package libX11-common.noarch 0:1.6.7-2.el7 will be installed
+---> Package libXft.x86_64 0:2.3.2-2.el7 will be installed
+--> Processing Dependency: fontconfig >= 2.2-1 for package: libXft-2.3.2-2.el7.x86_64
+--> Processing Dependency: libfontconfig.so.1()(64bit) for package: libXft-2.3.2-2.el7.x86_64
+--> Processing Dependency: libXrender.so.1()(64bit) for package: libXft-2.3.2-2.el7.x86_64
+---> Package libfabric.x86_64 0:1.7.0-1.el7 will be installed
+--> Processing Dependency: libnl-3.so.200(libnl_3)(64bit) for package: libfabric-1.7.0-1.el7.x86_64
+--> Processing Dependency: libnl-route-3.so.200()(64bit) for package: libfabric-1.7.0-1.el7.x86_64
+--> Processing Dependency: libnl-3.so.200()(64bit) for package: libfabric-1.7.0-1.el7.x86_64
+---> Package libgfortran.x86_64 0:4.8.5-39.el7 will be installed
+---> Package libibverbs.x86_64 0:22.4-2.el7_8 will be installed
+--> Processing Dependency: rdma-core(x86-64) = 22.4-2.el7_8 for package: libibverbs-22.4-2.el7_8.x86_64
+---> Package libpsm2.x86_64 0:11.2.78-1.el7 will be installed
+---> Package libquadmath-devel.x86_64 0:4.8.5-39.el7 will be installed
+---> Package librdmacm.x86_64 0:22.4-2.el7_8 will be installed
+---> Package libtool-ltdl.x86_64 0:2.4.2-22.el7_3 will be installed
+---> Package libxcb.x86_64 0:1.13-1.el7 will be installed
+--> Processing Dependency: libXau.so.6()(64bit) for package: libxcb-1.13-1.el7.x86_64
+---> Package lzo.x86_64 0:2.06-8.el7 will be installed
+---> Package opensm-libs.x86_64 0:3.3.21-2.el7 will be installed
+--> Processing Dependency: libibumad.so.3(IBUMAD_1.0)(64bit) for package: opensm-libs-3.3.21-2.el7.x86_64
+--> Processing Dependency: libibumad.so.3()(64bit) for package: opensm-libs-3.3.21-2.el7.x86_64
+---> Package python-backports.x86_64 0:1.0-8.el7 will be installed
+---> Package python-ipaddress.noarch 0:1.0.16-2.el7 will be installed
+---> Package ucx.x86_64 0:1.5.2-1.el7 will be installed
+--> Running transaction check
+---> Package fontconfig.x86_64 0:2.13.0-4.3.el7 will be installed
+--> Processing Dependency: fontpackages-filesystem for package: fontconfig-2.13.0-4.3.el7.x86_64
+--> Processing Dependency: dejavu-sans-fonts for package: fontconfig-2.13.0-4.3.el7.x86_64
+---> Package libXau.x86_64 0:1.0.8-2.1.el7 will be installed
+---> Package libXrender.x86_64 0:0.9.10-1.el7 will be installed
+---> Package libibumad.x86_64 0:22.4-2.el7_8 will be installed
+---> Package libnl3.x86_64 0:3.2.28-4.el7 will be installed
+---> Package libpng.x86_64 2:1.5.13-7.el7_2 will be installed
+---> Package rdma-core.x86_64 0:22.4-2.el7_8 will be installed
+--> Processing Dependency: pciutils for package: rdma-core-22.4-2.el7_8.x86_64
+--> Processing Dependency: initscripts for package: rdma-core-22.4-2.el7_8.x86_64
+--> Running transaction check
+---> Package dejavu-sans-fonts.noarch 0:2.33-6.el7 will be installed
+--> Processing Dependency: dejavu-fonts-common = 2.33-6.el7 for package: dejavu-sans-fonts-2.33-6.el7.noarch
+---> Package fontpackages-filesystem.noarch 0:1.44-8.el7 will be installed
+---> Package initscripts.x86_64 0:9.49.49-1.el7 will be installed
+--> Processing Dependency: sysvinit-tools >= 2.87-5 for package: initscripts-9.49.49-1.el7.x86_64
+--> Processing Dependency: iproute for package: initscripts-9.49.49-1.el7.x86_64
+---> Package pciutils.x86_64 0:3.5.1-3.el7 will be installed
+--> Processing Dependency: pciutils-libs = 3.5.1-3.el7 for package: pciutils-3.5.1-3.el7.x86_64
+--> Processing Dependency: libpci.so.3(LIBPCI_3.5)(64bit) for package: pciutils-3.5.1-3.el7.x86_64
+--> Processing Dependency: libpci.so.3(LIBPCI_3.3)(64bit) for package: pciutils-3.5.1-3.el7.x86_64
+--> Processing Dependency: libpci.so.3(LIBPCI_3.1)(64bit) for package: pciutils-3.5.1-3.el7.x86_64
+--> Processing Dependency: libpci.so.3(LIBPCI_3.0)(64bit) for package: pciutils-3.5.1-3.el7.x86_64
+--> Processing Dependency: hwdata for package: pciutils-3.5.1-3.el7.x86_64
+--> Processing Dependency: libpci.so.3()(64bit) for package: pciutils-3.5.1-3.el7.x86_64
+--> Running transaction check
+---> Package dejavu-fonts-common.noarch 0:2.33-6.el7 will be installed
+---> Package hwdata.x86_64 0:0.252-9.5.el7 will be installed
+---> Package iproute.x86_64 0:4.11.0-25.el7_7.2 will be installed
+--> Processing Dependency: libmnl.so.0(LIBMNL_1.0)(64bit) for package: iproute-4.11.0-25.el7_7.2.x86_64
+--> Processing Dependency: libxtables.so.10()(64bit) for package: iproute-4.11.0-25.el7_7.2.x86_64
+--> Processing Dependency: libmnl.so.0()(64bit) for package: iproute-4.11.0-25.el7_7.2.x86_64
+---> Package pciutils-libs.x86_64 0:3.5.1-3.el7 will be installed
+---> Package sysvinit-tools.x86_64 0:2.88-14.dsf.el7 will be installed
+--> Running transaction check
+---> Package iptables.x86_64 0:1.4.21-34.el7 will be installed
+--> Processing Dependency: libnfnetlink.so.0()(64bit) for package: iptables-1.4.21-34.el7.x86_64
+--> Processing Dependency: libnetfilter_conntrack.so.3()(64bit) for package: iptables-1.4.21-34.el7.x86_64
+---> Package libmnl.x86_64 0:1.0.3-7.el7 will be installed
+--> Running transaction check
+---> Package libnetfilter_conntrack.x86_64 0:1.0.6-1.el7_3 will be installed
+---> Package libnfnetlink.x86_64 0:1.0.1-4.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package                        Arch   Version                    Repository
+                                                                           Size
+================================================================================
+Installing:
+ cmake                          x86_64 2.8.12.2-2.el7             base    7.1 M
+ git                            x86_64 1.8.3.1-22.el7_8           updates 4.4 M
+ libSM                          x86_64 1.2.2-2.el7                base     39 k
+ libXext                        x86_64 1.3.3-3.el7                base     39 k
+ numactl                        x86_64 2.0.12-5.el7               base     66 k
+ openmpi-devel                  x86_64 1.10.7-5.el7               base    4.7 M
+ openssh-server                 x86_64 7.4p1-21.el7               base    459 k
+ python-setuptools              noarch 0.9.8-7.el7                base    397 k
+ tkinter                        x86_64 2.7.5-88.el7               base    327 k
+ wget                           x86_64 1.14-18.el7_6.1            base    547 k
+Installing for dependencies:
+ dejavu-fonts-common            noarch 2.33-6.el7                 base     64 k
+ dejavu-sans-fonts              noarch 2.33-6.el7                 base    1.4 M
+ environment-modules            x86_64 3.2.10-10.el7              base    107 k
+ fontconfig                     x86_64 2.13.0-4.3.el7             base    254 k
+ fontpackages-filesystem        noarch 1.44-8.el7                 base    9.9 k
+ freetype                       x86_64 2.8-14.el7                 base    380 k
+ gcc-gfortran                   x86_64 4.8.5-39.el7               base    6.7 M
+ hwdata                         x86_64 0.252-9.5.el7              base    2.4 M
+ hwloc-libs                     x86_64 1.11.8-4.el7               base    1.6 M
+ infinipath-psm                 x86_64 3.3-26_g604758e_open.2.el7 base    186 k
+ initscripts                    x86_64 9.49.49-1.el7              base    440 k
+ iproute                        x86_64 4.11.0-25.el7_7.2          base    803 k
+ iptables                       x86_64 1.4.21-34.el7              base    432 k
+ less                           x86_64 458-9.el7                  base    120 k
+ libICE                         x86_64 1.0.9-9.el7                base     66 k
+ libX11                         x86_64 1.6.7-2.el7                base    607 k
+ libX11-common                  noarch 1.6.7-2.el7                base    164 k
+ libXau                         x86_64 1.0.8-2.1.el7              base     29 k
+ libXft                         x86_64 2.3.2-2.el7                base     58 k
+ libXrender                     x86_64 0.9.10-1.el7               base     26 k
+ libarchive                     x86_64 3.1.2-14.el7_7             base    319 k
+ libfabric                      x86_64 1.7.0-1.el7                base    525 k
+ libgfortran                    x86_64 4.8.5-39.el7               base    300 k
+ libibumad                      x86_64 22.4-2.el7_8               updates  24 k
+ libibverbs                     x86_64 22.4-2.el7_8               updates 268 k
+ libmnl                         x86_64 1.0.3-7.el7                base     23 k
+ libnetfilter_conntrack         x86_64 1.0.6-1.el7_3              base     55 k
+ libnfnetlink                   x86_64 1.0.1-4.el7                base     26 k
+ libnl3                         x86_64 3.2.28-4.el7               base    278 k
+ libpng                         x86_64 2:1.5.13-7.el7_2           base    213 k
+ libpsm2                        x86_64 11.2.78-1.el7              base    189 k
+ libquadmath-devel              x86_64 4.8.5-39.el7               base     53 k
+ librdmacm                      x86_64 22.4-2.el7_8               updates  64 k
+ libtool-ltdl                   x86_64 2.4.2-22.el7_3             base     49 k
+ libxcb                         x86_64 1.13-1.el7                 base    214 k
+ lzo                            x86_64 2.06-8.el7                 base     59 k
+ numactl-libs                   x86_64 2.0.12-5.el7               base     30 k
+ openmpi                        x86_64 1.10.7-5.el7               base    3.1 M
+ opensm-libs                    x86_64 3.3.21-2.el7               base     68 k
+ pciutils                       x86_64 3.5.1-3.el7                base     93 k
+ pciutils-libs                  x86_64 3.5.1-3.el7                base     46 k
+ perl-Error                     noarch 1:0.17020-2.el7            base     32 k
+ perl-Git                       noarch 1.8.3.1-22.el7_8           updates  56 k
+ perl-TermReadKey               x86_64 2.30-20.el7                base     31 k
+ python-backports               x86_64 1.0-8.el7                  base    5.8 k
+ python-backports-ssl_match_hostname
+                                noarch 3.5.0.1-1.el7              base     13 k
+ python-ipaddress               noarch 1.0.16-2.el7               base     34 k
+ rdma-core                      x86_64 22.4-2.el7_8               updates  51 k
+ rsync                          x86_64 3.1.2-10.el7               base    404 k
+ sysvinit-tools                 x86_64 2.88-14.dsf.el7            base     63 k
+ tcl                            x86_64 1:8.5.13-8.el7             base    1.9 M
+ tcp_wrappers-libs              x86_64 7.6-77.el7                 base     66 k
+ tix                            x86_64 1:8.4.3-12.el7             base    254 k
+ tk                             x86_64 1:8.5.13-6.el7             base    1.4 M
+ ucx                            x86_64 1.5.2-1.el7                base    443 k
+
+Transaction Summary
+================================================================================
+Install  10 Packages (+55 Dependent packages)
+
+Total download size: 44 M
+Installed size: 145 M
+Downloading packages:
+--------------------------------------------------------------------------------
+Total                                               21 MB/s |  44 MB  00:02     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : numactl-libs-2.0.12-5.el7.x86_64                            1/65 
+  Installing : 1:tcl-8.5.13-8.el7.x86_64                                   2/65 
+  Installing : libpsm2-11.2.78-1.el7.x86_64                                3/65 
+  Installing : libnl3-3.2.28-4.el7.x86_64                                  4/65 
+  Installing : 1:perl-Error-0.17020-2.el7.noarch                           5/65 
+  Installing : libnfnetlink-1.0.1-4.el7.x86_64                             6/65 
+  Installing : infinipath-psm-3.3-26_g604758e_open.2.el7.x86_64            7/65 
+  Installing : fontpackages-filesystem-1.44-8.el7.noarch                   8/65 
+  Installing : libgfortran-4.8.5-39.el7.x86_64                             9/65 
+  Installing : libmnl-1.0.3-7.el7.x86_64                                  10/65 
+  Installing : libnetfilter_conntrack-1.0.6-1.el7_3.x86_64                11/65 
+  Installing : iptables-1.4.21-34.el7.x86_64                              12/65 
+  Installing : iproute-4.11.0-25.el7_7.2.x86_64                           13/65 
+  Installing : dejavu-fonts-common-2.33-6.el7.noarch                      14/65 
+  Installing : dejavu-sans-fonts-2.33-6.el7.noarch                        15/65 
+  Installing : less-458-9.el7.x86_64                                      16/65 
+  Installing : python-ipaddress-1.0.16-2.el7.noarch                       17/65 
+  Installing : rsync-3.1.2-10.el7.x86_64                                  18/65 
+  Installing : libXau-1.0.8-2.1.el7.x86_64                                19/65 
+  Installing : libxcb-1.13-1.el7.x86_64                                   20/65 
+  Installing : pciutils-libs-3.5.1-3.el7.x86_64                           21/65 
+  Installing : libquadmath-devel-4.8.5-39.el7.x86_64                      22/65 
+  Installing : gcc-gfortran-4.8.5-39.el7.x86_64                           23/65 
+  Installing : python-backports-1.0-8.el7.x86_64                          24/65 
+  Installing : python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch   25/65 
+  Installing : hwdata-0.252-9.5.el7.x86_64                                26/65 
+  Installing : pciutils-3.5.1-3.el7.x86_64                                27/65 
+  Installing : libX11-common-1.6.7-2.el7.noarch                           28/65 
+  Installing : libX11-1.6.7-2.el7.x86_64                                  29/65 
+  Installing : libXrender-0.9.10-1.el7.x86_64                             30/65 
+  Installing : environment-modules-3.2.10-10.el7.x86_64                   31/65 
+  Installing : libtool-ltdl-2.4.2-22.el7_3.x86_64                         32/65 
+  Installing : hwloc-libs-1.11.8-4.el7.x86_64                             33/65 
+  Installing : perl-TermReadKey-2.30-20.el7.x86_64                        34/65 
+  Installing : perl-Git-1.8.3.1-22.el7_8.noarch                           35/65 
+  Installing : git-1.8.3.1-22.el7_8.x86_64                                36/65 
+  Installing : sysvinit-tools-2.88-14.dsf.el7.x86_64                      37/65 
+  Installing : initscripts-9.49.49-1.el7.x86_64                           38/65 
+  Installing : rdma-core-22.4-2.el7_8.x86_64                              39/65 
+  Installing : libibverbs-22.4-2.el7_8.x86_64                             40/65 
+  Installing : librdmacm-22.4-2.el7_8.x86_64                              41/65 
+  Installing : ucx-1.5.2-1.el7.x86_64                                     42/65 
+  Installing : libfabric-1.7.0-1.el7.x86_64                               43/65 
+  Installing : libibumad-22.4-2.el7_8.x86_64                              44/65 
+  Installing : opensm-libs-3.3.21-2.el7.x86_64                            45/65 
+  Installing : openmpi-1.10.7-5.el7.x86_64                                46/65 
+  Installing : lzo-2.06-8.el7.x86_64                                      47/65 
+  Installing : libarchive-3.1.2-14.el7_7.x86_64                           48/65 
+  Installing : 2:libpng-1.5.13-7.el7_2.x86_64                             49/65 
+  Installing : freetype-2.8-14.el7.x86_64                                 50/65 
+  Installing : fontconfig-2.13.0-4.3.el7.x86_64                           51/65 
+  Installing : libXft-2.3.2-2.el7.x86_64                                  52/65 
+  Installing : 1:tk-8.5.13-6.el7.x86_64                                   53/65 
+  Installing : 1:tix-8.4.3-12.el7.x86_64                                  54/65 
+  Installing : tcp_wrappers-libs-7.6-77.el7.x86_64                        55/65 
+  Installing : libICE-1.0.9-9.el7.x86_64                                  56/65 
+  Installing : libSM-1.2.2-2.el7.x86_64                                   57/65 
+  Installing : openssh-server-7.4p1-21.el7.x86_64                         58/65 
+  Installing : tkinter-2.7.5-88.el7.x86_64                                59/65 
+  Installing : cmake-2.8.12.2-2.el7.x86_64                                60/65 
+  Installing : openmpi-devel-1.10.7-5.el7.x86_64                          61/65 
+  Installing : libXext-1.3.3-3.el7.x86_64                                 62/65 
+  Installing : python-setuptools-0.9.8-7.el7.noarch                       63/65 
+  Installing : numactl-2.0.12-5.el7.x86_64                                64/65 
+  Installing : wget-1.14-18.el7_6.1.x86_64                                65/65 
+install-info: No such file or directory for /usr/share/info/wget.info.gz
+  Verifying  : libXext-1.3.3-3.el7.x86_64                                  1/65 
+  Verifying  : 1:tcl-8.5.13-8.el7.x86_64                                   2/65 
+  Verifying  : libibverbs-22.4-2.el7_8.x86_64                              3/65 
+  Verifying  : libICE-1.0.9-9.el7.x86_64                                   4/65 
+  Verifying  : python-backports-ssl_match_hostname-3.5.0.1-1.el7.noarch    5/65 
+  Verifying  : libmnl-1.0.3-7.el7.x86_64                                   6/65 
+  Verifying  : libXrender-0.9.10-1.el7.x86_64                              7/65 
+  Verifying  : opensm-libs-3.3.21-2.el7.x86_64                             8/65 
+  Verifying  : environment-modules-3.2.10-10.el7.x86_64                    9/65 
+  Verifying  : tcp_wrappers-libs-7.6-77.el7.x86_64                        10/65 
+  Verifying  : libgfortran-4.8.5-39.el7.x86_64                            11/65 
+  Verifying  : libnetfilter_conntrack-1.0.6-1.el7_3.x86_64                12/65 
+  Verifying  : 1:tix-8.4.3-12.el7.x86_64                                  13/65 
+  Verifying  : 2:libpng-1.5.13-7.el7_2.x86_64                             14/65 
+  Verifying  : lzo-2.06-8.el7.x86_64                                      15/65 
+  Verifying  : freetype-2.8-14.el7.x86_64                                 16/65 
+  Verifying  : python-setuptools-0.9.8-7.el7.noarch                       17/65 
+  Verifying  : fontpackages-filesystem-1.44-8.el7.noarch                  18/65 
+  Verifying  : libpsm2-11.2.78-1.el7.x86_64                               19/65 
+  Verifying  : infinipath-psm-3.3-26_g604758e_open.2.el7.x86_64           20/65 
+  Verifying  : sysvinit-tools-2.88-14.dsf.el7.x86_64                      21/65 
+  Verifying  : perl-TermReadKey-2.30-20.el7.x86_64                        22/65 
+  Verifying  : iptables-1.4.21-34.el7.x86_64                              23/65 
+  Verifying  : dejavu-fonts-common-2.33-6.el7.noarch                      24/65 
+  Verifying  : libtool-ltdl-2.4.2-22.el7_3.x86_64                         25/65 
+  Verifying  : libnfnetlink-1.0.1-4.el7.x86_64                            26/65 
+  Verifying  : libX11-1.6.7-2.el7.x86_64                                  27/65 
+  Verifying  : libX11-common-1.6.7-2.el7.noarch                           28/65 
+  Verifying  : libxcb-1.13-1.el7.x86_64                                   29/65 
+  Verifying  : 1:tk-8.5.13-6.el7.x86_64                                   30/65 
+  Verifying  : initscripts-9.49.49-1.el7.x86_64                           31/65 
+  Verifying  : openmpi-1.10.7-5.el7.x86_64                                32/65 
+  Verifying  : openssh-server-7.4p1-21.el7.x86_64                         33/65 
+  Verifying  : perl-Git-1.8.3.1-22.el7_8.noarch                           34/65 
+  Verifying  : iproute-4.11.0-25.el7_7.2.x86_64                           35/65 
+  Verifying  : libarchive-3.1.2-14.el7_7.x86_64                           36/65 
+  Verifying  : hwdata-0.252-9.5.el7.x86_64                                37/65 
+  Verifying  : 1:perl-Error-0.17020-2.el7.noarch                          38/65 
+  Verifying  : libXft-2.3.2-2.el7.x86_64                                  39/65 
+  Verifying  : python-backports-1.0-8.el7.x86_64                          40/65 
+  Verifying  : gcc-gfortran-4.8.5-39.el7.x86_64                           41/65 
+  Verifying  : dejavu-sans-fonts-2.33-6.el7.noarch                        42/65 
+  Verifying  : libnl3-3.2.28-4.el7.x86_64                                 43/65 
+  Verifying  : ucx-1.5.2-1.el7.x86_64                                     44/65 
+  Verifying  : fontconfig-2.13.0-4.3.el7.x86_64                           45/65 
+  Verifying  : libquadmath-devel-4.8.5-39.el7.x86_64                      46/65 
+  Verifying  : numactl-2.0.12-5.el7.x86_64                                47/65 
+  Verifying  : git-1.8.3.1-22.el7_8.x86_64                                48/65 
+  Verifying  : openmpi-devel-1.10.7-5.el7.x86_64                          49/65 
+  Verifying  : pciutils-libs-3.5.1-3.el7.x86_64                           50/65 
+  Verifying  : libXau-1.0.8-2.1.el7.x86_64                                51/65 
+  Verifying  : numactl-libs-2.0.12-5.el7.x86_64                           52/65 
+  Verifying  : tkinter-2.7.5-88.el7.x86_64                                53/65 
+  Verifying  : cmake-2.8.12.2-2.el7.x86_64                                54/65 
+  Verifying  : rsync-3.1.2-10.el7.x86_64                                  55/65 
+  Verifying  : python-ipaddress-1.0.16-2.el7.noarch                       56/65 
+  Verifying  : hwloc-libs-1.11.8-4.el7.x86_64                             57/65 
+  Verifying  : rdma-core-22.4-2.el7_8.x86_64                              58/65 
+  Verifying  : wget-1.14-18.el7_6.1.x86_64                                59/65 
+  Verifying  : libfabric-1.7.0-1.el7.x86_64                               60/65 
+  Verifying  : pciutils-3.5.1-3.el7.x86_64                                61/65 
+  Verifying  : libibumad-22.4-2.el7_8.x86_64                              62/65 
+  Verifying  : libSM-1.2.2-2.el7.x86_64                                   63/65 
+  Verifying  : less-458-9.el7.x86_64                                      64/65 
+  Verifying  : librdmacm-22.4-2.el7_8.x86_64                              65/65 
+
+Installed:
+  cmake.x86_64 0:2.8.12.2-2.el7         git.x86_64 0:1.8.3.1-22.el7_8          
+  libSM.x86_64 0:1.2.2-2.el7            libXext.x86_64 0:1.3.3-3.el7           
+  numactl.x86_64 0:2.0.12-5.el7         openmpi-devel.x86_64 0:1.10.7-5.el7    
+  openssh-server.x86_64 0:7.4p1-21.el7  python-setuptools.noarch 0:0.9.8-7.el7 
+  tkinter.x86_64 0:2.7.5-88.el7         wget.x86_64 0:1.14-18.el7_6.1          
+
+Dependency Installed:
+  dejavu-fonts-common.noarch 0:2.33-6.el7                                       
+  dejavu-sans-fonts.noarch 0:2.33-6.el7                                         
+  environment-modules.x86_64 0:3.2.10-10.el7                                    
+  fontconfig.x86_64 0:2.13.0-4.3.el7                                            
+  fontpackages-filesystem.noarch 0:1.44-8.el7                                   
+  freetype.x86_64 0:2.8-14.el7                                                  
+  gcc-gfortran.x86_64 0:4.8.5-39.el7                                            
+  hwdata.x86_64 0:0.252-9.5.el7                                                 
+  hwloc-libs.x86_64 0:1.11.8-4.el7                                              
+  infinipath-psm.x86_64 0:3.3-26_g604758e_open.2.el7                            
+  initscripts.x86_64 0:9.49.49-1.el7                                            
+  iproute.x86_64 0:4.11.0-25.el7_7.2                                            
+  iptables.x86_64 0:1.4.21-34.el7                                               
+  less.x86_64 0:458-9.el7                                                       
+  libICE.x86_64 0:1.0.9-9.el7                                                   
+  libX11.x86_64 0:1.6.7-2.el7                                                   
+  libX11-common.noarch 0:1.6.7-2.el7                                            
+  libXau.x86_64 0:1.0.8-2.1.el7                                                 
+  libXft.x86_64 0:2.3.2-2.el7                                                   
+  libXrender.x86_64 0:0.9.10-1.el7                                              
+  libarchive.x86_64 0:3.1.2-14.el7_7                                            
+  libfabric.x86_64 0:1.7.0-1.el7                                                
+  libgfortran.x86_64 0:4.8.5-39.el7                                             
+  libibumad.x86_64 0:22.4-2.el7_8                                               
+  libibverbs.x86_64 0:22.4-2.el7_8                                              
+  libmnl.x86_64 0:1.0.3-7.el7                                                   
+  libnetfilter_conntrack.x86_64 0:1.0.6-1.el7_3                                 
+  libnfnetlink.x86_64 0:1.0.1-4.el7                                             
+  libnl3.x86_64 0:3.2.28-4.el7                                                  
+  libpng.x86_64 2:1.5.13-7.el7_2                                                
+  libpsm2.x86_64 0:11.2.78-1.el7                                                
+  libquadmath-devel.x86_64 0:4.8.5-39.el7                                       
+  librdmacm.x86_64 0:22.4-2.el7_8                                               
+  libtool-ltdl.x86_64 0:2.4.2-22.el7_3                                          
+  libxcb.x86_64 0:1.13-1.el7                                                    
+  lzo.x86_64 0:2.06-8.el7                                                       
+  numactl-libs.x86_64 0:2.0.12-5.el7                                            
+  openmpi.x86_64 0:1.10.7-5.el7                                                 
+  opensm-libs.x86_64 0:3.3.21-2.el7                                             
+  pciutils.x86_64 0:3.5.1-3.el7                                                 
+  pciutils-libs.x86_64 0:3.5.1-3.el7                                            
+  perl-Error.noarch 1:0.17020-2.el7                                             
+  perl-Git.noarch 0:1.8.3.1-22.el7_8                                            
+  perl-TermReadKey.x86_64 0:2.30-20.el7                                         
+  python-backports.x86_64 0:1.0-8.el7                                           
+  python-backports-ssl_match_hostname.noarch 0:3.5.0.1-1.el7                    
+  python-ipaddress.noarch 0:1.0.16-2.el7                                        
+  rdma-core.x86_64 0:22.4-2.el7_8                                               
+  rsync.x86_64 0:3.1.2-10.el7                                                   
+  sysvinit-tools.x86_64 0:2.88-14.dsf.el7                                       
+  tcl.x86_64 1:8.5.13-8.el7                                                     
+  tcp_wrappers-libs.x86_64 0:7.6-77.el7                                         
+  tix.x86_64 1:8.4.3-12.el7                                                     
+  tk.x86_64 1:8.5.13-6.el7                                                      
+  ucx.x86_64 0:1.5.2-1.el7                                                      
+
+Complete!
+cd910b9ed4430c3a33bb1234cadb2f0c4a112e66ebc12c0c717601b37f3f20ea
+STEP 8: RUN source scl_source enable devtoolset-8 rh-python36 &&     pip install --upgrade pip && 	pip install tensorflow==1.15.0 requests absl-py
+Collecting pip
+  Downloading https://files.pythonhosted.org/packages/54/2e/df11ea7e23e7e761d484ed3740285a34e38548cf2bad2bed3dd5768ec8b9/pip-20.1-py2.py3-none-any.whl (1.5MB)
+Installing collected packages: pip
+  Found existing installation: pip 9.0.1
+    Uninstalling pip-9.0.1:
+      Successfully uninstalled pip-9.0.1
+Successfully installed pip-20.1
+Collecting tensorflow==1.15.0
+  Downloading tensorflow-1.15.0-cp36-cp36m-manylinux2010_x86_64.whl (412.3 MB)
+Collecting requests
+  Downloading requests-2.23.0-py2.py3-none-any.whl (58 kB)
+Collecting absl-py
+  Downloading absl-py-0.9.0.tar.gz (104 kB)
+Collecting six>=1.10.0
+  Downloading six-1.14.0-py2.py3-none-any.whl (10 kB)
+Collecting tensorflow-estimator==1.15.1
+  Downloading tensorflow_estimator-1.15.1-py2.py3-none-any.whl (503 kB)
+Collecting gast==0.2.2
+  Downloading gast-0.2.2.tar.gz (10 kB)
+Collecting wheel>=0.26
+  Downloading wheel-0.34.2-py2.py3-none-any.whl (26 kB)
+Collecting protobuf>=3.6.1
+  Downloading protobuf-3.11.3-cp36-cp36m-manylinux1_x86_64.whl (1.3 MB)
+Collecting grpcio>=1.8.6
+  Downloading grpcio-1.29.0-cp36-cp36m-manylinux2010_x86_64.whl (3.0 MB)
+Collecting keras-applications>=1.0.8
+  Downloading Keras_Applications-1.0.8-py3-none-any.whl (50 kB)
+Collecting tensorboard<1.16.0,>=1.15.0
+  Downloading tensorboard-1.15.0-py3-none-any.whl (3.8 MB)
+Collecting google-pasta>=0.1.6
+  Downloading google_pasta-0.2.0-py3-none-any.whl (57 kB)
+Collecting termcolor>=1.1.0
+  Downloading termcolor-1.1.0.tar.gz (3.9 kB)
+Collecting astor>=0.6.0
+  Downloading astor-0.8.1-py2.py3-none-any.whl (27 kB)
+Collecting opt-einsum>=2.3.2
+  Downloading opt_einsum-3.2.1-py3-none-any.whl (63 kB)
+Collecting wrapt>=1.11.1
+  Downloading wrapt-1.12.1.tar.gz (27 kB)
+Collecting keras-preprocessing>=1.0.5
+  Downloading Keras_Preprocessing-1.1.2-py2.py3-none-any.whl (42 kB)
+Collecting numpy<2.0,>=1.16.0
+  Downloading numpy-1.18.4-cp36-cp36m-manylinux1_x86_64.whl (20.2 MB)
+Collecting chardet<4,>=3.0.2
+  Downloading chardet-3.0.4-py2.py3-none-any.whl (133 kB)
+Collecting idna<3,>=2.5
+  Downloading idna-2.9-py2.py3-none-any.whl (58 kB)
+Collecting urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1
+  Downloading urllib3-1.25.9-py2.py3-none-any.whl (126 kB)
+Collecting certifi>=2017.4.17
+  Downloading certifi-2020.4.5.1-py2.py3-none-any.whl (157 kB)
+Requirement already satisfied: setuptools in /opt/rh/rh-python36/root/usr/lib/python3.6/site-packages (from protobuf>=3.6.1->tensorflow==1.15.0) (36.5.0)
+Collecting h5py
+  Downloading h5py-2.10.0-cp36-cp36m-manylinux1_x86_64.whl (2.9 MB)
+Collecting werkzeug>=0.11.15
+  Downloading Werkzeug-1.0.1-py2.py3-none-any.whl (298 kB)
+Collecting markdown>=2.6.8
+  Downloading Markdown-3.2.2-py3-none-any.whl (88 kB)
+Collecting importlib-metadata; python_version < "3.8"
+  Downloading importlib_metadata-1.6.0-py2.py3-none-any.whl (30 kB)
+Collecting zipp>=0.5
+  Downloading zipp-3.1.0-py3-none-any.whl (4.9 kB)
+Could not build wheels for absl-py, since package 'wheel' is not installed.
+Could not build wheels for gast, since package 'wheel' is not installed.
+Could not build wheels for termcolor, since package 'wheel' is not installed.
+Could not build wheels for wrapt, since package 'wheel' is not installed.
+Could not build wheels for setuptools, since package 'wheel' is not installed.
+ERROR: tensorboard 1.15.0 has requirement setuptools>=41.0.0, but you'll have setuptools 36.5.0 which is incompatible.
+Installing collected packages: six, tensorflow-estimator, gast, wheel, protobuf, absl-py, grpcio, numpy, h5py, keras-applications, werkzeug, zipp, importlib-metadata, markdown, tensorboard, google-pasta, termcolor, astor, opt-einsum, wrapt, keras-preprocessing, tensorflow, chardet, idna, urllib3, certifi, requests
+    Running setup.py install for gast: started
+    Running setup.py install for gast: finished with status 'done'
+    Running setup.py install for absl-py: started
+    Running setup.py install for absl-py: finished with status 'done'
+    Running setup.py install for termcolor: started
+    Running setup.py install for termcolor: finished with status 'done'
+    Running setup.py install for wrapt: started
+    Running setup.py install for wrapt: finished with status 'done'
+Successfully installed absl-py-0.9.0 astor-0.8.1 certifi-2020.4.5.1 chardet-3.0.4 gast-0.2.2 google-pasta-0.2.0 grpcio-1.29.0 h5py-2.10.0 idna-2.9 importlib-metadata-1.6.0 keras-applications-1.0.8 keras-preprocessing-1.1.2 markdown-3.2.2 numpy-1.18.4 opt-einsum-3.2.1 protobuf-3.11.3 requests-2.23.0 six-1.14.0 tensorboard-1.15.0 tensorflow-1.15.0 tensorflow-estimator-1.15.1 termcolor-1.1.0 urllib3-1.25.9 werkzeug-1.0.1 wheel-0.34.2 wrapt-1.12.1 zipp-3.1.0
+STEP 9: COMMIT docker-registry.default.svc:5000/mlperf/tf_cnn:latest
+418aef92ec85774e8aba1d5d9317f0c4da9b40e9fbbf70fe93fb0155fe5f361e
