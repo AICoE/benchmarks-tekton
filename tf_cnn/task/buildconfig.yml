@@ -1,0 +1,75 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: tfc-buildconfig
+spec:
+  inputs:
+    params:
+    - name: BUILDER_IMAGE
+      description: The location of the buildah builder image.
+      default: quay.io/openshift/origin-cli:latest
+      type: string
+    - name: BUILD_NAME
+      description: Name of the BuildConfig pods.
+      default: tf-cnn-benchmark-build
+      type: string
+
+  steps:
+  - name: run
+    image: $(inputs.params.BUILDER_IMAGE)
+    workingDir: /tf_cnn
+    securityContext:
+      privileged: true
+    args:
+      - '-c'
+      - |
+        # ct_os_get_build_pod_status POD_PREFIX
+        # --------------------
+        # Returns status of the build pod specified by prefix [pod_prefix].
+        # Arguments: pod_prefix - prefix or whole ID of the pod
+        function ct_os_get_build_pod_status() {
+          local pod_prefix="${1}" ; shift
+          local query="custom-columns=Ready:status.containerStatuses[0].state.terminated.reason,NAME:.metadata.name"
+          oc get pods -o "$query" | grep -e "${pod_prefix}" | grep -E "\-build$" \
+                                  | awk '{print $1}' | head -n 1
+        }
+
+        # ct_os_get_all_pods_name
+        # --------------------
+        # Returns the full name of all pods.
+        function ct_os_get_all_pods_name() {
+          oc get pods --no-headers -o custom-columns=NAME:.metadata.name
+        }
+
+        # ct_os_wait_build_pod_done POD_PREFIX TIMEOUT
+        # --------------------
+        # Wait maximum [timeout] for the pod becomming ready.
+        # Arguments: pod_prefix - prefix or whole ID of the pod
+        # Arguments: timeout - how many seconds to wait seconds
+        function ct_os_wait_build_pod_done() {
+          local pod_prefix="${1}" ; shift
+          local timeout="${1}" ; shift
+          # If there is a build pod - wait for it to finish first
+          sleep 3
+          if ct_os_get_all_pods_name | grep -E "${pod_prefix}.*-build"; then
+            SECONDS=0
+            echo -n "Waiting for ${pod_prefix} build pod to finish ..."
+            while ! [ "$(ct_os_get_build_pod_status "${pod_prefix}")" == "Completed" ] ; do
+              echo -n "."
+              [ "${SECONDS}" -gt "${timeout}0" ] && echo " FAIL" && return 1
+              sleep 3
+            done
+            echo " DONE"
+          fi
+        }
+        oc start-build $(inputs.params.BUILD_NAME)
+        sleep 3
+        ct_os_wait_build_pod_done $(inputs.params.BUILD_NAME) 3600 
+    command: 
+      - /bin/sh  
+
+
+  volumes:
+  - name: varlibcontainers
+    emptyDir: {}

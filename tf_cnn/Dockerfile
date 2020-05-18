@@ -1,5 +1,6 @@
 #FROM centos:7
 FROM registry.access.redhat.com/ubi7/s2i-base
+USER root
 # Use this block with centos:7 image
 # RUN yum install -y centos-release-scl && \
 #  yum install devtoolset-7 rh-python36 -y

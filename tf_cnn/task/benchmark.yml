@@ -1,12 +1,15 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: tfc-run
+  name: tfc-benchmark
 spec:
   inputs:
     resources:
     - name: image
       type: image
+    - name: source
+      type: git
+
     params:
     - name: device
       type: string
@@ -27,15 +30,37 @@ spec:
     - name: train_dir
       type: string
   steps:
+    - name: ls
+      image: $(inputs.resources.image.url)
+      workingDir: /workspace/source
+      args:
+        - '-c'
+        - |
+          echo "PWD="$PWD
+          ls -l 
+      command: 
+        - /bin/sh  
+      volumeMounts:
+      - name: varlibcontainers
+        mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+
     - name: run
       image: $(inputs.resources.image.url)
-      workingDir: /tf_cnn
+      workingDir: /workspace/source
+      volumeMounts:
+        - name: train-dir
+          mountPath: $(inputs.params.train_dir)
       securityContext:
         privileged: true
       args:
         - '-c'
         - |
-          source scl_source enable devtoolset-8 rh-python36
+          source scl_source enable devtoolset-7 rh-python36
+          gcc -v
+          python -V
+          cd scripts/tf_cnn_benchmarks
           python tf_cnn_benchmarks.py \
             --device=$(inputs.params.device) --batch_size=$(inputs.params.batch_size) --model=$(inputs.params.model) \
             --variable_update=$(inputs.params.variable_update) --data_format=$(inputs.params.data_format) \
@@ -44,4 +69,8 @@ spec:
       command: 
         - /bin/sh
 
-  
+  volumes:
+  - name: train-dir
+    emptyDir: {}
+  - name: varlibcontainers
+    emptyDir: {}

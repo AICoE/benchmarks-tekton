@@ -1,0 +1,34 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tfc-repo
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/tensorflow/benchmarks.git
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tfc-build-image
+spec:
+  type: image
+  params:
+    - name: url
+      value: docker-registry.default.svc:5000/mlperf/tf-cnn-benchmark:latest
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: tfc-dockerfile-repo
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/AICoE/benchmarks-tekton.git
+    - name: revision
+      value: master

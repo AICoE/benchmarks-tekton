@@ -1,0 +1,36 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: tfc-taskrun
+  namespace: mlperf
+spec:
+  taskRef:
+    name: tfc-benchmark
+  serviceAccount: mlperf
+  inputs:
+    resources:
+      - name: image
+        resourceRef:
+          name: tfc-build-image
+      - name: source
+        resourceRef:
+          name: tfc-repo
+    params:
+      - name: device
+        value: "cpu"
+      - name: batch_size
+        value: "10"
+      - name: model
+        value: "resnet50"
+      - name: variable_update
+        value: "independent"
+      - name: data_format
+        value: "NHWC"
+      - name: weight_decay
+        value: "1e-4"
+      - name: optimizer
+        value: "momentum"
+      - name: gradient_repacking
+        value: "8"
+      - name: train_dir
+        value: "/train"

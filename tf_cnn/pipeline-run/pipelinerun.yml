@@ -7,7 +7,10 @@ spec:
   pipelineRef:
     name: tf-cnn
   resources:
-  - name: repo
+  - name: dockerfile-repo
+    resourceRef:
+      name: tfc-dockerfile-repo
+  - name: benchmark-repo
     resourceRef:
       name: tfc-repo
   - name: build-image
@@ -31,4 +34,6 @@ spec:
   - name: gradient_repacking
     value: "8"
   - name: train_dir
-    value: "/tf_cnn/train"
+    value: "/train"
+  - name: dockerfile
+    value: ./tf_cnn/Dockerfile.centos7

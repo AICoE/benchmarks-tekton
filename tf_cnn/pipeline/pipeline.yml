@@ -39,9 +39,14 @@ spec:
     - name: train_dir
       type: string
       description: training model
-      default: "/tf_cnn/train"
+      default: "/train"
+    - name: dockerfile
+      type: string
+      default: "./Dockerfile"
   resources:
-    - name: repo
+    - name: dockerfile-repo
+      type: git
+    - name: benchmark-repo
       type: git
     - name: build-image
       type: image
@@ -51,22 +56,27 @@ spec:
       taskRef:
         name: tfc-buildah
         kind: Task
+      params:
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
       resources:
         inputs:
           - name: source
-            resource: repo
+            resource: dockerfile-repo
         outputs:
           - name: image
             resource: build-image
 
-    - name: run
+    - name: benchmark
       taskRef:
-        name: tfc-run
+        name: tfc-benchmark
         kind: Task
       resources:
         inputs:
           - name: image
             resource: build-image
+          - name: source
+            resource: benchmark-repo
       params:
         - name: device
           value: $(params.device)

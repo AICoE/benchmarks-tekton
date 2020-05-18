@@ -8,10 +8,13 @@ spec:
     name: tfc-buildah
   serviceAccount: mlperf
   inputs:
+    params:
+      - name: DOCKERFILE
+        value: ./tf_cnn/Dockerfile.centos7 #for ubi7 entitled builds are needed.
     resources:
       - name: source
         resourceRef:
-          name: tfc-repo
+          name: tfc-dockerfile-repo
   outputs:
     resources:
       - name: image

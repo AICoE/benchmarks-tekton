@@ -1,0 +1,13 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: tfc-buildconfig-run
+  namespace: mlperf
+spec:
+  taskRef:
+    name: tfc-buildconfig
+  serviceAccount: mlperf
+  inputs:
+    params:
+      - name: BUILD_NAME
+        value: tf-cnn-benchmark-build
