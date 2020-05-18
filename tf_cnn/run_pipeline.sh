@@ -1,1 +1,1 @@
-oc create -f pipeline/pipelinerun.yml
+oc create -f pipeline-run/pipelinerun.yml

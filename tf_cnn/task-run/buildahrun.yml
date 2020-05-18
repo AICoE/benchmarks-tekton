@@ -1,14 +1,19 @@
 apiVersion: tekton.dev/v1alpha1
 kind: TaskRun
 metadata:
-  name: tfc-taskrun
+  name: tfc-buildah-run
   namespace: mlperf
 spec:
   taskRef:
-    name: tfc-run
+    name: tfc-buildah
   serviceAccount: mlperf
   inputs:
     resources:
-      - name: build-image
+      - name: source
+        resourceRef:
+          name: tfc-repo
+  outputs:
+    resources:
+      - name: image
         resourceRef:
           name: tfc-build-image

@@ -19,5 +19,5 @@ spec:
   type: image
   params:
     - name: url
-      value: docker-registry.default.svc:5000/mlperf/tf_cnn:latest
+      value: docker-registry.default.svc:5000/mlperf/tf_cnn_benchmark:latest
 ---

@@ -58,6 +58,7 @@ spec:
         outputs:
           - name: image
             resource: build-image
+
     - name: run
       taskRef:
         name: tfc-run
