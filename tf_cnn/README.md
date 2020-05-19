@@ -16,7 +16,7 @@ Run the setup script to create Tasks, Pipelines
 `./setup.sh`
 
 To run the pipeline, execute the run script.
-`./run_pipeline.sh`
+`./run_pipeline.sh 4x`
 
 To delete the pipeline , task resources execute the drop_pipeline script.   
 `./drop_pipeline.sh`
