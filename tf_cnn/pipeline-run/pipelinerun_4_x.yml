@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
-  name: tf-cnn-pipeline-run
+  generateName: tf-cnn-pipeline-4x-run-
 spec:
   serviceAccountName: mlperf
   pipelineRef:
-    name: tf-cnn
+    name: tf-cnn-4x
   resources:
   - name: dockerfile-repo
     resourceRef:
@@ -15,7 +15,7 @@ spec:
       name: tfc-repo
   - name: build-image
     resourceRef:
-      name: tfc-build-image
+      name: tfc-build-image-4x
   params:
   - name: device
     value: "cpu"
@@ -37,3 +37,5 @@ spec:
     value: "/train"
   - name: dockerfile
     value: ./tf_cnn/Dockerfile.centos7
+  - name: build_name
+    value: tf-cnn-benchmark-build-4x

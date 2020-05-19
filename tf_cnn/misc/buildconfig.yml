@@ -1,12 +1,4 @@
 ---
-kind: ImageStream
-apiVersion: image.openshift.io/v1
-metadata:
-  name: tf-cnn-benchmark
-spec:
-  lookupPolicy:
-    local: true
----
 kind: "BuildConfig"
 apiVersion: "build.openshift.io/v1"  #3.11 v1
 metadata:
@@ -45,6 +37,52 @@ spec:
   strategy: 
     type: "Docker"
     dockerStrategy:
+      dockerfilePath: Dockerfile
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "tf-cnn-benchmark:latest"
+---
+kind: "BuildConfig"
+apiVersion: "build.openshift.io/v1" 
+metadata:
+  name: "tf-cnn-benchmark-build-4x" 
+spec:
+  source: 
+    type: "Git"
+    git:
+      uri: "https://github.com/sub-mod/empty-repo"
+    dockerfile: |-
+      FROM centos:7
+      #FROM registry.access.redhat.com/ubi7/s2i-base
+      # Use this block with centos:7 image
+      RUN yum install -y centos-release-scl && \
+          yum install devtoolset-7 rh-python36 -y
+
+      #Use this block with registry.access.redhat.com/ubi7/s2i-base image
+      # RUN yum-config-manager --enable rhel-server-rhscl-7-rpms rhel-7-server-devtools-rpms && \    
+      #     yum install -y scl-utils devtoolset-7 rh-python36 glibc-debuginfo rh-python36-python-debuginfo
+      RUN yum update -y && yum install -y \
+          ca-certificates \
+          build-essential \
+          git \
+          curl \
+          wget \
+          unzip \
+          which \
+          python-setuptools \
+          cmake tkinter numactl \
+          libSM libXext \
+          openmpi-devel \
+          openssh openssh-server
+      RUN source scl_source enable devtoolset-7 rh-python36 && \
+          pip install --upgrade pip && \
+          pip install tensorflow==1.15.0 requests absl-py
+      USER 1001
+  strategy: 
+    type: "Docker"
+    dockerStrategy:
+      noCache: false
       dockerfilePath: Dockerfile
   output: 
     to:

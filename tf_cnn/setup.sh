@@ -1,3 +1,3 @@
-oc create -f misc/
-oc create -f pipeline/
-oc create -f task/
+oc apply -f misc/
+oc apply -f pipeline/
+oc apply -f task/

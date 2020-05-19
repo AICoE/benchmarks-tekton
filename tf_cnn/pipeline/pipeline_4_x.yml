@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: tf-cnn
+  name: tf-cnn-4x
 spec:
   params:
     - name: device
@@ -44,6 +44,11 @@ spec:
       type: string
       description: Dockerfile path
       default: "./Dockerfile"
+    - name: build_name
+      type: string
+      description: Name of the Opebshift Build
+      default: "tf-cnn-benchmark-build-4x"
+
   resources:
     - name: dockerfile-repo
       type: git
@@ -55,18 +60,11 @@ spec:
   tasks:
     - name: build
       taskRef:
-        name: tfc-buildah
+        name: tfc-buildconfig
         kind: Task
       params:
-        - name: DOCKERFILE
-          value: $(params.dockerfile)
-      resources:
-        inputs:
-          - name: source
-            resource: dockerfile-repo
-        outputs:
-          - name: image
-            resource: build-image
+        - name: BUILD_NAME
+          value: $(params.build_name)
 
     - name: benchmark
       taskRef:

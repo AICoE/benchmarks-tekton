@@ -1,0 +1,17 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1  #3.11 v1
+metadata:
+  name: tf-cnn-benchmark-build1
+spec:
+  source: 
+    type: Git
+    git:
+      uri: https://github.com/AICoE/benchmarks-tekton.git
+  strategy: 
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: ./tf_cnn/Dockerfile
+  output: 
+    to:
+      kind: ImageStreamTag
+      name: tf-cnn-benchmark:latest
