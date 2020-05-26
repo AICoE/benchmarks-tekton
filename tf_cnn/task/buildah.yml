@@ -1,4 +1,3 @@
----
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
@@ -16,6 +15,10 @@ spec:
     - name: TLSVERIFY
       description: Verify the TLS on the registry endpoint (for push/pull to a non-TLS registry)
       default: "false"
+    - name: device
+      type: string
+      description: device type
+      default: "gpu"
 
     resources:
     - name: source
@@ -46,7 +49,7 @@ spec:
   - name: build
     image: $(inputs.params.BUILDER_IMAGE)
     workingDir: /workspace/source
-    command: ["buildah", "bud", '--tls-verify=$(inputs.params.TLSVERIFY)', '--layers', '-f', '$(inputs.params.DOCKERFILE)', '-t', '$(outputs.resources.image.url)', '.']
+    command: ["buildah", "bud", '--tls-verify=$(inputs.params.TLSVERIFY)', '--layers', '-f', '$(inputs.params.DOCKERFILE)', '-t', '$(outputs.resources.image.url):$(inputs.params.device)', '.']
     volumeMounts:
     - name: varlibcontainers
       mountPath: /var/lib/containers
@@ -56,7 +59,7 @@ spec:
   - name: push
     image: $(inputs.params.BUILDER_IMAGE)
     workingDir: /workspace/source
-    command: ['buildah', 'push', '--tls-verify=$(inputs.params.TLSVERIFY)', '$(outputs.resources.image.url)', 'docker://$(outputs.resources.image.url)']
+    command: ['buildah', 'push', '--tls-verify=$(inputs.params.TLSVERIFY)', '$(outputs.resources.image.url):$(inputs.params.device)', 'docker://$(outputs.resources.image.url):$(inputs.params.device)']
     volumeMounts:
     - name: varlibcontainers
       mountPath: /var/lib/containers

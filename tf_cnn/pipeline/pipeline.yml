@@ -4,10 +4,18 @@ metadata:
   name: tf-cnn
 spec:
   params:
+    - name: DOCKERFILE
+      type: string
+      description: build source
+      default: "./tf_cnn/Dockerfile.centos7gpu"
     - name: device
       type: string
       description: device type
-      default: "cpu"
+      default: "gpu"
+    - name: num_gpus
+      type: string
+      description: number of gpus to use
+      default: "4"
     - name: batch_size
       type: string
       description: training batch size
@@ -60,6 +68,8 @@ spec:
       params:
         - name: DOCKERFILE
           value: $(params.dockerfile)
+        - name: device
+          value: $(params.device)
       resources:
         inputs:
           - name: source
@@ -68,7 +78,7 @@ spec:
           - name: image
             resource: build-image
 
-    - name: benchmark
+    - name: run
       taskRef:
         name: tfc-benchmark
         kind: Task
@@ -81,6 +91,8 @@ spec:
       params:
         - name: device
           value: $(params.device)
+        - name: num_gpus
+          value: $(params.num_gpus)
         - name: batch_size
           value: $(params.batch_size)
         - name: model

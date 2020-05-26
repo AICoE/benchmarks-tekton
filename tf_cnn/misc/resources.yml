@@ -21,7 +21,7 @@ spec:
     - name: url
       value: https://github.com/AICoE/benchmarks-tekton.git
     - name: revision
-      value: master
+      value: tf-cnn
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
@@ -31,7 +31,7 @@ spec:
   type: image
   params:
     - name: url
-      value: docker-registry.default.svc:5000/mlperf/tf-cnn-benchmark:latest
+      value: docker-registry.default.svc:5000/mlperf/tfc-benchmark
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
@@ -41,4 +41,4 @@ spec:
   type: image
   params:
     - name: url
-      value: image-registry.openshift-image-registry.svc:5000/mlperf/tf-cnn-benchmark:latest
+      value: image-registry.openshift-image-registry.svc:5000/mlperf/tfc-benchmark

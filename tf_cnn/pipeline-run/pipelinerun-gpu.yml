@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
-  name: tf-cnn-pipeline-run
+  generateName: tf-cnn-pipelinerun-gpu
 spec:
   serviceAccountName: mlperf
   pipelineRef:
@@ -18,7 +18,9 @@ spec:
       name: tfc-build-image
   params:
   - name: device
-    value: "cpu"
+    value: "gpu"
+  - name: num_gpus
+    value: "4"
   - name: batch_size
     value: "200"
   - name: model
@@ -36,4 +38,4 @@ spec:
   - name: train_dir
     value: "/train"
   - name: dockerfile
-    value: ./tf_cnn/Dockerfile.centos7
+    value: ./tf_cnn/Dockerfile.centos7gpu

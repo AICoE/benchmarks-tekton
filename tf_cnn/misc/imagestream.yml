@@ -1,7 +1,9 @@
 kind: ImageStream
 apiVersion: image.openshift.io/v1
 metadata:
-  name: tf-cnn-benchmark
+  namespace: mlperf
+  name: tfc-benchmark
 spec:
   lookupPolicy:
     local: true
+    
