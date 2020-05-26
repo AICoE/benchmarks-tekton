@@ -15,8 +15,8 @@ oc adm policy add-scc-to-user privileged -z mlperf -n mlperf
 Run the setup script to create Tasks, Pipelines
 `./setup.sh`
 
-To run the pipeline, execute the run script.
-`./run_pipeline.sh 4x`
+To run the pipeline, execute the run script. You must first specify a cpu or gpu run. If you will be running the pipeline on an Openshift cluster with version 4, you also must specify "4x".
+`./run_pipeline.sh gpu 4x`
 
 To delete the pipeline , task resources execute the drop_pipeline script.   
 `./drop_pipeline.sh`

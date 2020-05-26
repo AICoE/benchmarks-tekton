@@ -16,7 +16,7 @@ spec:
       type: string
 
   steps:
-  - name: run
+  - name: build
     image: $(inputs.params.BUILDER_IMAGE)
     workingDir: /tf_cnn
     securityContext:

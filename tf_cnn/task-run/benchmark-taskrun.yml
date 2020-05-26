@@ -17,9 +17,11 @@ spec:
           name: tfc-repo
     params:
       - name: device
-        value: "cpu"
+        value: "gpu"
+      - name: num_gpus
+        value: "4"
       - name: batch_size
-        value: "10"
+        value: "200"
       - name: model
         value: "resnet50"
       - name: variable_update

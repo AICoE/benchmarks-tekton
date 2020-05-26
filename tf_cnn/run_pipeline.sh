@@ -1,8 +1,20 @@
+DEVICE="$1"
+OS_VERSION="$2"
 
-if [ $1 = "4x" ]; then
-    echo "Running for 4.x cluster"
-    oc create -f pipeline-run/pipelinerun_4_x.yml
+if [ $DEVICE == 'cpu' ]; then
+	if [ $OS_VERSION == '4x' ]; then
+	    echo "Running for 4.x cluster"
+	    oc create -f pipeline-run/pipelinerun_4x-cpu.yml
+	else
+		oc create -f pipeline-run/pipelinerun-cpu.yml
+	fi
+elif [ $DEVICE == 'gpu' ]; then
+	if [ $OS_VERSION == '4x' ]; then
+	    echo "Running for 4.x cluster"
+	    oc create -f pipeline-run/pipelinerun_4x-gpu.yml
+	else
+		oc create -f pipeline-run/pipelinerun-gpu.yml
+	fi
 else
-    echo "Running for 3.11 cluster"
-    oc create -f pipeline-run/pipelinerun.yml
+	echo "must specify either cpu or gpu"
 fi

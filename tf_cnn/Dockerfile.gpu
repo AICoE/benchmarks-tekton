@@ -1,6 +1,12 @@
-FROM registry.access.redhat.com/ubi7/s2i-base
+FROM nvidia/cuda:10.0-cudnn7-runtime-ubi7
 
 USER root
+
+ENV PATH $PATH:$CUDA_HOME/bin
+ENV PYENV_ROOT $HOME/.pyenv
+ENV PATH $PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/cuda/lib64:/usr/local/cuda/extras/CUPTI/lib64
 
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms rhel-7-server-devtools-rpms && \    
     yum install -y scl-utils devtoolset-8 rh-python36
@@ -21,7 +27,7 @@ RUN yum update -y && yum install -y \
 
 RUN source scl_source enable devtoolset-8 rh-python36 && \
     pip install --upgrade pip && \
-	pip install tensorflow==1.15.0 requests absl-py
+	pip install tensorflow-gpu==1.15.0 requests absl-py
 
 # always let tekton start container as non-root user
 USER 1001

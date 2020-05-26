@@ -7,7 +7,11 @@ spec:
     - name: device
       type: string
       description: device type
-      default: "cpu"
+      default: "gpu"
+    - name: num_gpus
+      type: string
+      description: number of gpus to use
+      default: "4"
     - name: batch_size
       type: string
       description: training batch size
@@ -43,7 +47,7 @@ spec:
     - name: dockerfile
       type: string
       description: Dockerfile path
-      default: "./Dockerfile"
+      default: "./Dockerfile.gpu"
     - name: build_name
       type: string
       description: Name of the Opebshift Build
@@ -79,6 +83,8 @@ spec:
       params:
         - name: device
           value: $(params.device)
+        - name: num_gpus
+          value: $(params.num_gpus)
         - name: batch_size
           value: $(params.batch_size)
         - name: model

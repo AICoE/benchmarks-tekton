@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1  #3.11 v1
 metadata:
-  name: tf-cnn-benchmark-build1
+  name: tf-cnn-benchmark-build-cpu
 spec:
   source: 
     type: Git
