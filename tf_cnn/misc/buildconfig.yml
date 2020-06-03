@@ -25,7 +25,7 @@ spec:
   source: 
     type: "Git"
     git:
-      uri: "https://github.com/Xaenalt/benchmarks-tekton.git"
+      uri: "https://github.com/sub-mod/empty-repo"
   strategy: 
     type: "Docker"
     dockerStrategy:
