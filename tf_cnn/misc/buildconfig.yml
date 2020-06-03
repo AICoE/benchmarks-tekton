@@ -15,7 +15,7 @@ spec:
   output: 
     to:
       kind: "ImageStreamTag"
-      name: "tf-cnn-benchmark:latest"
+      name: "tfc-benchmark:cpu"
 ---
 kind: "BuildConfig"
 apiVersion: "build.openshift.io/v1" 
@@ -25,7 +25,7 @@ spec:
   source: 
     type: "Git"
     git:
-      uri: "https://github.com/sub-mod/empty-repo"
+      uri: "https://github.com/Xaenalt/benchmarks-tekton.git"
   strategy: 
     type: "Docker"
     dockerStrategy:
@@ -34,4 +34,4 @@ spec:
   output: 
     to:
       kind: "ImageStreamTag"
-      name: "tf-cnn-benchmark:latest"
+      name: "tfc-benchmark:cpu"
