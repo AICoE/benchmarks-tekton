@@ -60,11 +60,18 @@ spec:
   tasks:
     - name: build
       taskRef:
-        name: tfc-buildconfig
+        name: tfc-buildah
         kind: Task
       params:
-        - name: BUILD_NAME
-          value: $(params.build_name)
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
+      resources:
+        inputs:
+          - name: source
+            resource: dockerfile-repo
+        outputs:
+          - name: image
+            resource: build-image
 
     - name: benchmark
       taskRef:
