@@ -19,8 +19,8 @@ RUN yum update -y && yum install -y \
     openmpi-devel \
     openssh openssh-server
 
-RUN source scl_source enable devtoolset-7 rh-python36 && \
-    pip install --upgrade pip && \
+RUN source scl_source enable rh-python36 && \
+    pip install --upgrade pip setuptools wheel && \
 	pip install tensorflow==1.15.0 requests absl-py
 
 # always let tekton start container as non-root user
