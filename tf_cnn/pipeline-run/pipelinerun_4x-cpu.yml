@@ -20,7 +20,7 @@ spec:
   - name: device
     value: "cpu"
   - name: num_gpus
-    value: ""
+    value: "4"
   - name: batch_size
     value: "200"
   - name: model

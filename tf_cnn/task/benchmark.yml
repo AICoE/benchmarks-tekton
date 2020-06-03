@@ -57,10 +57,10 @@ spec:
       resources:
         limits:
           memory: "12Gi"
-          nvidia.com/gpu: 4
+          # nvidia.com/gpu: 4
         requests: 
           memory: "10Gi"
-          nvidia.com/gpu: 4
+          # nvidia.com/gpu: 4
       securityContext:
         privileged: true
       args:
