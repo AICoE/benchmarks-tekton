@@ -5,7 +5,7 @@ metadata:
 spec:
   serviceAccountName: mlperf
   pipelineRef:
-    name: tf-cnn-4x
+    name: tf-cnn-4x-gpu
   resources:
   - name: dockerfile-repo
     resourceRef:
@@ -38,6 +38,6 @@ spec:
   - name: train_dir
     value: "/train"
   - name: dockerfile
-    value: ./tf_cnn/Dockerfile.centos7gpu
+    value: ./tf_cnn/Dockerfile.gpu
   - name: build_name
     value: tf-cnn-benchmark-build-4x

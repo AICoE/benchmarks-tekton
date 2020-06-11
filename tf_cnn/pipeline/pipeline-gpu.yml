@@ -1,9 +1,12 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: tf-cnn-4x
+  name: tf-cnn-gpu
 spec:
   params:
+    - name: dockerfile
+      type: string
+      description: build source
     - name: device
       type: string
       description: device type
@@ -11,7 +14,6 @@ spec:
     - name: num_gpus
       type: string
       description: number of gpus to use
-      default: "4"
     - name: batch_size
       type: string
       description: training batch size
@@ -44,15 +46,6 @@ spec:
       type: string
       description: training dir
       default: "/train"
-    - name: dockerfile
-      type: string
-      description: Dockerfile path
-      default: "./Dockerfile.gpu"
-    - name: build_name
-      type: string
-      description: Name of the Opebshift Build
-      default: "tf-cnn-benchmark-build-4x"
-
   resources:
     - name: dockerfile-repo
       type: git
@@ -64,15 +57,24 @@ spec:
   tasks:
     - name: build
       taskRef:
-        name: tfc-buildconfig
+        name: tfc-buildah
         kind: Task
       params:
-        - name: BUILD_NAME
-          value: $(params.build_name)
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
+        - name: device
+          value: $(params.device)
+      resources:
+        inputs:
+          - name: source
+            resource: dockerfile-repo
+        outputs:
+          - name: image
+            resource: build-image
 
-    - name: benchmark
+    - name: run
       taskRef:
-        name: tfc-benchmark
+        name: tfc-benchmark-gpu
         kind: Task
       resources:
         inputs:

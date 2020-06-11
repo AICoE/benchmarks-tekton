@@ -15,7 +15,7 @@ spec:
   output: 
     to:
       kind: "ImageStreamTag"
-      name: "tf-cnn-benchmark:latest"
+      name: "tf-cnn-benchmark:cpu"
 ---
 kind: "BuildConfig"
 apiVersion: "build.openshift.io/v1" 

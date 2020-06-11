@@ -21,7 +21,7 @@ spec:
     - name: url
       value: https://github.com/AICoE/benchmarks-tekton.git
     - name: revision
-      value: tf-cnn
+      value: master
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource

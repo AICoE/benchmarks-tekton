@@ -5,7 +5,7 @@ metadata:
 spec:
   serviceAccountName: mlperf
   pipelineRef:
-    name: tf-cnn
+    name: tf-cnn-gpu
   resources:
   - name: dockerfile-repo
     resourceRef:

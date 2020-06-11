@@ -1,12 +1,15 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: tfc-run
+  name: tfc-benchmark-gpu
 spec:
   inputs:
     resources:
     - name: image
       type: image
+    - name: source
+      type: git
+
     params:
     - name: device
       type: string
@@ -29,15 +32,47 @@ spec:
     - name: train_dir
       type: string
   steps:
+    - name: ls
+      image: '$(inputs.resources.image.url):$(inputs.params.device)'
+      workingDir: /workspace/source
+      args:
+        - '-c'
+        - |
+          set -ex
+          echo "PWD="$PWD
+          ls -l 
+      command: 
+        - /bin/sh  
+      volumeMounts:
+      - name: varlibcontainers
+        mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+
     - name: run
       image: '$(inputs.resources.image.url):$(inputs.params.device)'
-      workingDir: /tf_cnn
-      securityContext:
+      workingDir: /workspace/source
+      volumeMounts:
+        - name: train-dir
+          mountPath: '$(inputs.params.train_dir)'
+      resources:
+        limits:
+          memory: "12Gi"
+          nvidia.com/gpu: 2
+        requests: 
+          memory: "10Gi"
+          nvidia.com/gpu: 2
+      securityContext:  
+
         privileged: true
       args:
         - '-c'
         - |
           source scl_source enable devtoolset-8 rh-python36
+          set -ex
+          gcc -v
+          python -V
+          cd scripts/tf_cnn_benchmarks
           python tf_cnn_benchmarks.py \
             --device=$(inputs.params.device) --num_gpus=$(inputs.params.num_gpus) --batch_size=$(inputs.params.batch_size) --model=$(inputs.params.model) \
             --variable_update=$(inputs.params.variable_update) --data_format=$(inputs.params.data_format) \
@@ -46,4 +81,8 @@ spec:
       command: 
         - /bin/sh
 
-  
+  volumes:
+  - name: train-dir
+    emptyDir: {}
+  - name: varlibcontainers
+    emptyDir: {}
