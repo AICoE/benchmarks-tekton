@@ -1,4 +1,5 @@
-oc delete pipeline/tf-cnn
+oc delete pipeline/tf-cnn-gpu
+oc delete pipeline/tf-cnn-cpu
 oc delete pipeline/tf-cnn-4x
 oc delete pipelinerun/tf-cnn-pipelinerun-cpu
 oc delete pipelinerun/tf-cnn-pipelinerun-gpu
@@ -8,7 +9,8 @@ oc delete pipelineresource/tfc-dockerfile-repo
 oc delete pipelineresource/tfc-build-image-4x
 oc delete pipelineresource/tfc-build-image
 oc delete task/tfc-buildah
-oc delete task/tfc-benchmark
+oc delete task/tfc-benchmark-cpu
+oc delete task/tfc-benchmark-gpu
 oc delete task/tfc-buildconfig
 oc delete task/tfc-run
 oc delete buildconfig/tf-cnn-benchmark-build1

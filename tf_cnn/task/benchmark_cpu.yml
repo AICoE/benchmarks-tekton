@@ -1,0 +1,83 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: tfc-benchmark-cpu
+spec:
+  inputs:
+    resources:
+    - name: image
+      type: image
+    - name: source
+      type: git
+
+    params:
+    - name: device
+      type: string
+    - name: num_gpus
+      type: string
+    - name: batch_size
+      type: string
+    - name: model
+      type: string
+    - name: variable_update
+      type: string
+    - name: data_format
+      type: string
+    - name: weight_decay
+      type: string
+    - name: optimizer
+      type: string
+    - name: gradient_repacking
+      type: string
+    - name: train_dir
+      type: string
+  steps:
+    - name: ls
+      image: '$(inputs.resources.image.url):$(inputs.params.device)'
+      workingDir: /workspace/source
+      args:
+        - '-c'
+        - |
+          echo "PWD="$PWD
+          ls -l 
+      command: 
+        - /bin/sh  
+      volumeMounts:
+      - name: varlibcontainers
+        mountPath: /var/lib/containers
+      securityContext:
+        privileged: true
+
+    - name: run
+      image: '$(inputs.resources.image.url):$(inputs.params.device)'
+      workingDir: /workspace/source
+      volumeMounts:
+        - name: train-dir
+          mountPath: $(inputs.params.train_dir)
+      resources:
+        limits:
+          memory: "12Gi"
+        requests: 
+          memory: "10Gi"
+      securityContext:
+        privileged: true
+      args:
+        - '-c'
+        - |
+          source scl_source enable devtoolset-8 rh-python36
+          gcc -v
+          python -V
+          cd scripts/tf_cnn_benchmarks
+          python tf_cnn_benchmarks.py \
+            --device=$(inputs.params.device) --num_gpus=$(inputs.params.num_gpus) --batch_size=$(inputs.params.batch_size) --model=$(inputs.params.model) \
+            --variable_update=$(inputs.params.variable_update) --data_format=$(inputs.params.data_format) \
+            --nodistortions --weight_decay=$(inputs.params.weight_decay) --optimizer=$(inputs.params.optimizer) \
+            --gradient_repacking=$(inputs.params.gradient_repacking) --train_dir=$(inputs.params.train_dir) 
+      command: 
+        - /bin/sh
+
+  volumes:
+  - name: train-dir
+    emptyDir: {}
+  - name: varlibcontainers
+    emptyDir: {}

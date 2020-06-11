@@ -1,0 +1,113 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: tf-cnn-gpu
+spec:
+  params:
+    - name: DOCKERFILE
+      type: string
+      description: build source
+      default: "./tf_cnn/Dockerfile.centos7gpu"
+    - name: device
+      type: string
+      description: device type
+      default: "gpu"
+    - name: num_gpus
+      type: string
+      description: number of gpus to use
+      default: "4"
+    - name: batch_size
+      type: string
+      description: training batch size
+      default: "10"
+    - name: model
+      type: string
+      description: training model
+      default: "resnet50"
+    - name: variable_update
+      type: string
+      description: The method for managing variables
+      default: "independent"
+    - name: data_format
+      type: string
+      description: NHWC for cpu, NCHW for gpu
+      default: "NHWC"
+    - name: weight_decay
+      type: string
+      description: training decay value
+      default: "1e-4"
+    - name: optimizer
+      type: string
+      description: optimize strategy
+      default: "momentum"
+    - name: gradient_repacking
+      type: string
+      description: gradient_repacking
+      default: "8"
+    - name: train_dir
+      type: string
+      description: training dir
+      default: "/train"
+    - name: dockerfile
+      type: string
+      description: Dockerfile path
+      default: "./Dockerfile"
+  resources:
+    - name: dockerfile-repo
+      type: git
+    - name: benchmark-repo
+      type: git
+    - name: build-image
+      type: image
+
+  tasks:
+    # - name: build
+    #   taskRef:
+    #     name: tfc-buildah
+    #     kind: Task
+    #   params:
+    #     - name: DOCKERFILE
+    #       value: $(params.dockerfile)
+    #     - name: device
+    #       value: $(params.device)
+    #   resources:
+    #     inputs:
+    #       - name: source
+    #         resource: dockerfile-repo
+    #     outputs:
+    #       - name: image
+    #         resource: build-image
+
+    - name: run
+      taskRef:
+        name: tfc-benchmark-gpu
+        kind: Task
+      resources:
+        inputs:
+          - name: image
+            resource: build-image
+          - name: source
+            resource: benchmark-repo
+      params:
+        - name: device
+          value: $(params.device)
+        - name: num_gpus
+          value: $(params.num_gpus)
+        - name: batch_size
+          value: $(params.batch_size)
+        - name: model
+          value: $(params.model)
+        - name: variable_update
+          value: $(params.variable_update)
+        - name: data_format
+          value: $(params.data_format)
+        - name: weight_decay
+          value: $(params.weight_decay)
+        - name: optimizer
+          value: $(params.optimizer)
+        - name: gradient_repacking
+          value: $(params.gradient_repacking)
+        - name: train_dir
+          value: $(params.train_dir)
+      # runAfter:
+      #   - build
