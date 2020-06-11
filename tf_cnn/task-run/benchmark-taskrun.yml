@@ -1,11 +1,11 @@
 apiVersion: tekton.dev/v1alpha1
 kind: TaskRun
 metadata:
-  name: tfc-taskrun
+  name: tfc-taskrun-gpu
   namespace: mlperf
 spec:
   taskRef:
-    name: tfc-benchmark
+    name: tfc-benchmark-gpu
   serviceAccount: mlperf
   inputs:
     resources:

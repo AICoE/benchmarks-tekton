@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: tfc-benchmark
+  name: tfc-benchmark-cpu
 spec:
   inputs:
     resources:
@@ -57,10 +57,8 @@ spec:
       resources:
         limits:
           memory: "12Gi"
-          nvidia.com/gpu: 4
         requests: 
           memory: "10Gi"
-          nvidia.com/gpu: 4
       securityContext:
         privileged: true
       args:

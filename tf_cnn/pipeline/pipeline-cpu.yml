@@ -1,25 +1,26 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Pipeline
 metadata:
-  name: tf-cnn
+  name: tf-cnn-cpu
 spec:
   params:
-    - name: DOCKERFILE
+    - name: dockerfile
       type: string
       description: build source
-      default: "./tf_cnn/Dockerfile.centos7gpu"
     - name: device
       type: string
       description: device type
       default: "gpu"
+    - name: taskname
+      type: string
+      description: name of run task
     - name: num_gpus
       type: string
       description: number of gpus to use
-      default: "4"
     - name: batch_size
       type: string
       description: training batch size
-      default: "10"
+      default: "200"
     - name: model
       type: string
       description: training model
@@ -31,7 +32,6 @@ spec:
     - name: data_format
       type: string
       description: NHWC for cpu, NCHW for gpu
-      default: "NHWC"
     - name: weight_decay
       type: string
       description: training decay value
@@ -48,10 +48,6 @@ spec:
       type: string
       description: training dir
       default: "/train"
-    - name: dockerfile
-      type: string
-      description: Dockerfile path
-      default: "./Dockerfile"
   resources:
     - name: dockerfile-repo
       type: git
@@ -80,7 +76,7 @@ spec:
 
     - name: run
       taskRef:
-        name: tfc-benchmark
+        name: tfc-benchmark-cpu
         kind: Task
       resources:
         inputs:
