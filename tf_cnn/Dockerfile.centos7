@@ -19,7 +19,7 @@ RUN yum update -y && yum install -y \
     openmpi-devel \
     openssh openssh-server
 
-RUN source scl_source enable devtoolset-7 rh-python36 && \
+RUN source scl_source enable devtoolset-8 rh-python36 && \
     pip install --upgrade pip && \
 	pip install tensorflow==1.15.0 requests absl-py
 

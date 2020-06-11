@@ -5,7 +5,7 @@ metadata:
 spec:
   serviceAccountName: mlperf
   pipelineRef:
-    name: tf-cnn
+    name: tf-cnn-cpu
   resources:
   - name: dockerfile-repo
     resourceRef:
@@ -20,7 +20,7 @@ spec:
   - name: device
     value: "cpu"
   - name: num_gpus
-    value: ""
+    value: "10"
   - name: batch_size
     value: "200"
   - name: model
